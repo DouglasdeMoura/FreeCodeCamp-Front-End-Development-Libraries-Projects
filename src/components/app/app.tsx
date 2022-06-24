@@ -1,3 +1,4 @@
+import '../../styles/global.css'
 import { FC } from 'react'
 
 export const App: FC = () => {
