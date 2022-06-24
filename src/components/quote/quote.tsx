@@ -2,8 +2,8 @@ import '../../styles/global.css'
 import { FC } from 'react'
 
 type QuoteProps = {
-  quote?: string
-  author?: string
+  quote: string
+  author: string
 }
 
 export const Quote: FC<QuoteProps> = ({ author, quote }) => {
