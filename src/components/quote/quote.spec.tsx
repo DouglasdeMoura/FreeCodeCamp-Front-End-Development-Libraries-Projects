@@ -1,7 +1,7 @@
 import { querySelector, render, screen } from '../../utils/test-utils'
 import { Quote } from './quote'
 
-const props = { quote: 'mock_quote', author: 'mock_author' }
+const props = { text: 'mock_quote', author: 'mock_author' }
 
 describe('Random Quote Machine', () => {
   test('I can see a wrapper element with a corresponding id="quote-box"', () => {

@@ -2,16 +2,16 @@ import '../../styles/global.css'
 import { FC } from 'react'
 
 type QuoteProps = {
-  quote: string
   author: string
+  text: string
 }
 
-export const Quote: FC<QuoteProps> = ({ author, quote }) => {
+export const Quote: FC<QuoteProps> = ({ author, text }) => {
   return (
     <div id="quote-box">
       <figure>
-        <blockquote id="text">{author}</blockquote>
-        <figcaption id="author">{quote}</figcaption>
+        <blockquote id="text">{text}</blockquote>
+        <figcaption id="author">{author}</figcaption>
       </figure>
       <button id="new-quote">New Quote</button>
       <a href="#!" id="tweet-quote">
