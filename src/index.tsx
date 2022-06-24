@@ -1,6 +1,6 @@
 import { createRoot } from 'react-dom/client'
 
-import { App } from './components/app'
+import { App } from './components/quote'
 
 const container = document.getElementById('app')
 const root = createRoot(container!)
