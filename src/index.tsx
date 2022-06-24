@@ -1,8 +1,14 @@
 import { createRoot } from 'react-dom/client'
 
-import { App } from './components/quote'
+import { Quote } from './components/quote'
 
-const container = document.getElementById('app')
+if (import.meta.env.MODE === 'development') {
+  const { worker } = await import('./mocks/browser')
+
+  worker.start()
+}
+
+const container = document.getElementById('Quote')
 const root = createRoot(container!)
 
-root.render(<App />)
+root.render(<Quote />)
