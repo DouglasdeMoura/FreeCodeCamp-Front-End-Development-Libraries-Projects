@@ -40,4 +40,26 @@ describe('Random Quote Machine', () => {
     expect(link).toBeInTheDocument()
     expect(link).toHaveAttribute('id', 'tweet-quote')
   })
+
+  test('On first load, my quote machine displays a random quote in the element with id="text"', () => {
+    render(<Quote {...props} />)
+
+    const quoteBox = screen.getByText(props.text)
+
+    expect(quoteBox).toBeInTheDocument()
+    expect(quoteBox).toHaveAttribute('id', 'text')
+  })
+
+  test('On first load, my quote machine displays the random quote\'s author in the element with id="author"', () => {
+    render(<Quote {...props} />)
+
+    const author = screen.getByText(props.author)
+
+    expect(author).toBeInTheDocument()
+    expect(author).toHaveAttribute('id', 'author')
+  })
+
+  test('When the #new-quote button is clicked, my quote machine should fetch a new quote and display it in the #text element', () => {
+    render(<Quote {...props} />)
+  })
 })
