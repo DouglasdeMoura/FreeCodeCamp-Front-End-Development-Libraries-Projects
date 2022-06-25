@@ -1,6 +1,7 @@
 import '../../styles/global.css'
 import { FC } from 'react'
-import { FaTwitter, FaCircleNotch } from 'react-icons/fa'
+import ContentLoader from 'react-content-loader'
+import { FaTwitter } from 'react-icons/fa'
 
 import { useQuote } from './quote.hooks'
 
@@ -12,7 +13,7 @@ const tweetURL = (text: string, author: string) => {
 }
 
 export const Quote: FC = () => {
-  const { data, isLoading, refetch } = useQuote()
+  const { data, refetch } = useQuote()
 
   return (
     <div className="flex justify-center items-center w-screen h-screen bg-emerald-500">
@@ -22,17 +23,26 @@ export const Quote: FC = () => {
       >
         <figure className="flex flex-col gap-2">
           <blockquote id="text" className="flex gap-4 justify-between text-xl">
-            {data?.text}
-            {isLoading && (
-              <FaCircleNotch className="opacity-40 animate-spin" size={20} />
+            {data?.text ? (
+              data?.text
+            ) : (
+              <ContentLoader viewBox={`0 0 380 60`}>
+                <rect x="0" y="0" rx="4" ry="4" width="300" height="25" />
+                <rect x="0" y="36" rx="4" ry="4" width="280" height="25" />
+              </ContentLoader>
             )}
           </blockquote>
           <figcaption
             id="author"
             className="flex gap-4 justify-between font-bold"
           >
-            {data?.author}
-            {isLoading && <FaCircleNotch className="opacity-40 animate-spin" />}
+            {data?.author ? (
+              data?.author
+            ) : (
+              <ContentLoader viewBox={`0 0 380 32`}>
+                <rect x="0" y="16" rx="4" ry="4" width="300" height="16" />
+              </ContentLoader>
+            )}
           </figcaption>
         </figure>
         <div className="flex gap-4 justify-between align-middle">
