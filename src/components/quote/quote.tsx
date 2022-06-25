@@ -21,12 +21,18 @@ export const Quote: FC = () => {
         className="flex flex-col gap-4 p-6 max-w-md bg-slate-200 rounded-lg"
       >
         <figure className="flex flex-col gap-2">
-          <blockquote id="text" className="text-xl">
-            {isLoading && <FaCircleNotch />} {data?.text}
+          <blockquote id="text" className="flex gap-4 justify-between text-xl">
+            {data?.text}
+            {isLoading && (
+              <FaCircleNotch className="opacity-40 animate-spin" size={20} />
+            )}
           </blockquote>
-          <figcaption id="author" className="font-bold">
-            {isLoading && <FaCircleNotch />}
+          <figcaption
+            id="author"
+            className="flex gap-4 justify-between font-bold"
+          >
             {data?.author}
+            {isLoading && <FaCircleNotch className="opacity-40 animate-spin" />}
           </figcaption>
         </figure>
         <div className="flex gap-4 justify-between align-middle">
