@@ -3701,6 +3701,11 @@
   resolved "https://registry.yarnpkg.com/@types/unist/-/unist-2.0.6.tgz#250a7b16c3b91f672a24552ec64678eeb1d3a08d"
   integrity sha512-PBjIUxZHOuj0R15/xuwJYjFi+KZdNFrehocChv4g5hu6aFroHue8m0lBP0POdK2nKzbw0cgV1mws8+V/JAcEkQ==
 
+"@types/user-event@^4.1.1":
+  version "4.1.1"
+  resolved "https://registry.yarnpkg.com/@types/user-event/-/user-event-4.1.1.tgz#933a1cd33a3c70c40c652929a274a7d142bd25a2"
+  integrity sha512-9wt60fMsgxwlBmUhALH/08asccFyCJm9arlsDKDkzh1Njq5DKf6Df3NaX2VBZwbTOpSEd6UdOVyHcFF7hGzuqQ==
+
 "@types/webpack-env@^1.16.0":
   version "1.16.3"
   resolved "https://registry.yarnpkg.com/@types/webpack-env/-/webpack-env-1.16.3.tgz#b776327a73e561b71e7881d0cd6d34a1424db86a"
