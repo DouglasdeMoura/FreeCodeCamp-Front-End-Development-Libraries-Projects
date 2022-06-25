@@ -1,5 +1,6 @@
 import { createRoot } from 'react-dom/client'
 import { QueryClient, QueryClientProvider } from 'react-query'
+import { BrowserRouter, Routes, Route } from 'react-router-dom'
 
 import { Quote } from './components/quote'
 
@@ -13,7 +14,13 @@ const queryClient = new QueryClient()
 
 const App = () => (
   <QueryClientProvider client={queryClient}>
-    <Quote />
+    <BrowserRouter>
+      <Routes>
+        <Route path="/">
+          <Route path="random-quote-machine" element={<Quote />} />
+        </Route>
+      </Routes>
+    </BrowserRouter>
   </QueryClientProvider>
 )
 
