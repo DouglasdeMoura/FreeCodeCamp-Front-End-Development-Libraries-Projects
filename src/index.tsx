@@ -8,6 +8,7 @@ if (import.meta.env.MODE === 'development') {
 
   worker.start()
 }
+
 const queryClient = new QueryClient()
 
 const App = () => (
