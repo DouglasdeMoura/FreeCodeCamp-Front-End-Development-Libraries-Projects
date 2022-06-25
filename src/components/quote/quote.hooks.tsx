@@ -15,7 +15,13 @@ function getRandomItem<T = unknown>(arr: T[]) {
 
 const getQuotes = () => api.get<Quote[]>('/quotes').then((res) => res.data)
 
-const useQuotes = () => useQuery('quotes', getQuotes)
+const useQuotes = () =>
+  useQuery('quotes', getQuotes, {
+    retry: false,
+    refetchOnWindowFocus: false,
+    refetchOnReconnect: false,
+    refetchOnMount: false,
+  })
 
 export const useQuote = () => {
   const { data, ...args } = useQuotes()

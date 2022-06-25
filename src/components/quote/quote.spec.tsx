@@ -104,7 +104,9 @@ describe('Random Quote Machine', () => {
   test('I can tweet the current quote by clicking on the #tweet-quote a element. This a element should include the "twitter.com/intent/tweet" path in its href attribute to tweet the current quote', () => {
     customRender(<Quote />)
 
-    const tweetThis = screen.getByText('Tweet this quote!')
+    const text = screen.getByText('Tweet this quote!')
+    // eslint-disable-next-line testing-library/no-node-access
+    const tweetThis = text?.parentElement as HTMLAnchorElement
 
     expect(tweetThis).toHaveAttribute('id', 'tweet-quote')
     expect(tweetThis).toHaveAttribute('target', '_blank')
