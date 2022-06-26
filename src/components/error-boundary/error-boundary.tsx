@@ -16,7 +16,7 @@ export const ErrorBoundary: FC<ErrorBoundaryProps> = ({
 }) => (
   <ReactErrorBoundary
     fallbackRender={({ error, resetErrorBoundary }) => (
-      <div className="flex justify-center m-4 w-full h-full">
+      <div className="flex justify-center m-4 w-full">
         <div
           role="alert"
           className="py-5 px-6 mb-4 text-base text-red-700 bg-red-100 rounded-lg"

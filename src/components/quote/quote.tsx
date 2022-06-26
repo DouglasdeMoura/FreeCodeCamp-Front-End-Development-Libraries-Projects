@@ -17,7 +17,7 @@ export const Quote: FC = () => {
   const { data, refetch } = useQuote()
 
   return (
-    <div className="flex justify-center items-center w-screen h-screen bg-emerald-500">
+    <>
       <div
         id="quote-box"
         className="flex flex-col gap-4 p-6 max-w-md bg-slate-200 rounded-lg"
@@ -63,6 +63,6 @@ export const Quote: FC = () => {
           </Button>
         </div>
       </div>
-    </div>
+    </>
   )
 }

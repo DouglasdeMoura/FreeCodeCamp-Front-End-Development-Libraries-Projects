@@ -13,11 +13,13 @@ if (import.meta.env.MODE === 'development') {
 }
 
 const SuspendedRoute: React.FC = () => (
-  <React.Suspense>
-    <ErrorBoundary>
-      <Outlet />
-    </ErrorBoundary>
-  </React.Suspense>
+  <div className="flex justify-center items-center w-screen h-screen bg-emerald-500">
+    <React.Suspense>
+      <ErrorBoundary>
+        <Outlet />
+      </ErrorBoundary>
+    </React.Suspense>
+  </div>
 )
 
 const queryClient = new QueryClient({
