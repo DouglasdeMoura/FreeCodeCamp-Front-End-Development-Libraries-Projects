@@ -3,6 +3,7 @@ import { createRoot } from 'react-dom/client'
 import { QueryClient, QueryClientProvider } from 'react-query'
 import { BrowserRouter, Routes, Route, Outlet } from 'react-router-dom'
 
+import { ErrorBoundary } from './components/error-boundary'
 import { routes } from './routes'
 
 if (import.meta.env.MODE === 'development') {
@@ -13,7 +14,9 @@ if (import.meta.env.MODE === 'development') {
 
 const SuspendedRoute: React.FC = () => (
   <React.Suspense>
-    <Outlet />
+    <ErrorBoundary>
+      <Outlet />
+    </ErrorBoundary>
   </React.Suspense>
 )
 
