@@ -1,6 +1,8 @@
 import { FC } from 'react'
 import { ErrorBoundary as ReactErrorBoundary } from 'react-error-boundary'
 
+import { Button } from '../button'
+
 type ErrorBoundaryProps = {
   children: React.ReactNode
   showTryAgain?: boolean
@@ -21,9 +23,9 @@ export const ErrorBoundary: FC<ErrorBoundaryProps> = ({
         <h2>Something went wrong:</h2>
         <pre className="whitespace-pre-line">{error.message}</pre>
         {showTryAgain && (
-          <button onClick={() => resetErrorBoundary()}>
+          <Button onClick={() => resetErrorBoundary()}>
             {tryAgainText || 'Try again'}
-          </button>
+          </Button>
         )}
       </div>
     )}
