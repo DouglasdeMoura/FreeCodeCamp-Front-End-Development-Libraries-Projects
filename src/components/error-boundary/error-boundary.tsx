@@ -16,17 +16,19 @@ export const ErrorBoundary: FC<ErrorBoundaryProps> = ({
 }) => (
   <ReactErrorBoundary
     fallbackRender={({ error, resetErrorBoundary }) => (
-      <div
-        role="alert"
-        className="py-5 px-6 mb-4 text-base text-red-700 bg-red-100 rounded-lg"
-      >
-        <h2>Something went wrong:</h2>
-        <pre className="whitespace-pre-line">{error.message}</pre>
-        {showTryAgain && (
-          <Button onClick={() => resetErrorBoundary()}>
-            {tryAgainText || 'Try again'}
-          </Button>
-        )}
+      <div className="flex justify-center m-4 w-full h-full">
+        <div
+          role="alert"
+          className="py-5 px-6 mb-4 text-base text-red-700 bg-red-100 rounded-lg"
+        >
+          <h2>Something went wrong:</h2>
+          <pre className="mb-4 whitespace-pre-line">{error.message}</pre>
+          {showTryAgain && (
+            <Button onClick={() => resetErrorBoundary()} variant="danger">
+              {tryAgainText || 'Try again'}
+            </Button>
+          )}
+        </div>
       </div>
     )}
   >
