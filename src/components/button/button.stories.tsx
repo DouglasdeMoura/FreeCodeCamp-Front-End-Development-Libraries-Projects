@@ -19,3 +19,9 @@ Secondary.args = {
   children: 'Button',
   variant: 'secondary',
 }
+
+export const Danger = Template.bind({})
+Danger.args = {
+  children: 'Button',
+  variant: 'danger',
+}
