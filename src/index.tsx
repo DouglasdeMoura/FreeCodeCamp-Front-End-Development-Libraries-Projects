@@ -1,9 +1,9 @@
-import { lazy, StrictMode } from 'react'
+import React from 'react'
 import { createRoot } from 'react-dom/client'
 import { QueryClient, QueryClientProvider } from 'react-query'
-import { BrowserRouter, Routes, Route } from 'react-router-dom'
+import { BrowserRouter, Routes, Route, Outlet } from 'react-router-dom'
 
-const Quote = lazy(() => import('./components/quote'))
+const Quote = React.lazy(() => import('./components/quote'))
 
 if (import.meta.env.MODE === 'development') {
   const { worker } = await import('./mocks/browser')
@@ -11,13 +11,19 @@ if (import.meta.env.MODE === 'development') {
   worker.start()
 }
 
+const SuspendedRoute: React.FC = () => (
+  <React.Suspense>
+    <Outlet />
+  </React.Suspense>
+)
+
 const queryClient = new QueryClient()
 
 const App = () => (
   <QueryClientProvider client={queryClient}>
     <BrowserRouter>
       <Routes>
-        <Route path="/">
+        <Route path="/" element={<SuspendedRoute />}>
           <Route path="random-quote-machine" element={<Quote />} />
         </Route>
       </Routes>
@@ -29,7 +35,7 @@ const container = document.getElementById('app')
 const root = createRoot(container!)
 
 root.render(
-  <StrictMode>
+  <React.StrictMode>
     <App />
-  </StrictMode>,
+  </React.StrictMode>,
 )
