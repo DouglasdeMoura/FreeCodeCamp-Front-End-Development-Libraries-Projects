@@ -6,33 +6,33 @@ import {
   screen,
   waitFor,
 } from '../../utils/test-utils'
-import { Quote } from './quote'
+import { RandomQuoteMachine } from './random-quote-machine'
 
 const props = { text: 'mock_quote', author: 'mock_author' }
 
-describe('Random Quote Machine', () => {
+describe('<RandomQuoteMachine />', () => {
   afterEach(() => {
     process.env.NEW_QUOTE = ''
   })
 
   test('I can see a wrapper element with a corresponding id="quote-box"', () => {
-    const { container } = customRender(<Quote />)
+    const { container } = customRender(<RandomQuoteMachine />)
 
     expect(querySelector(container, '#quote-box')).not.toBeNull()
   })
 
   test('Within #quote-box, I can see an element with corresponding id="text"', () => {
-    const { container } = customRender(<Quote />)
+    const { container } = customRender(<RandomQuoteMachine />)
     expect(querySelector(container, '#quote-box #text')).not.toBeNull()
   })
 
   test('Within #quote-box, I can see an element with corresponding id="author".', () => {
-    const { container } = customRender(<Quote />)
+    const { container } = customRender(<RandomQuoteMachine />)
     expect(querySelector(container, '#quote-box #author')).not.toBeNull()
   })
 
   test('Within #quote-box, I can see a clickable element with corresponding id="new-quote"', () => {
-    const { container } = customRender(<Quote />)
+    const { container } = customRender(<RandomQuoteMachine />)
 
     expect(querySelector(container, '#quote-box #new-quote')).not.toBeNull()
 
@@ -43,7 +43,7 @@ describe('Random Quote Machine', () => {
   })
 
   test('Within #quote-box, I can see a clickable a element with a corresponding id="tweet-quote"', () => {
-    const { container } = customRender(<Quote />)
+    const { container } = customRender(<RandomQuoteMachine />)
 
     expect(querySelector(container, '#quote-box #author')).not.toBeNull()
 
@@ -53,7 +53,7 @@ describe('Random Quote Machine', () => {
   })
 
   test('On first load, my quote machine displays a random quote in the element with id="text"', () => {
-    customRender(<Quote />)
+    customRender(<RandomQuoteMachine />)
 
     const quoteBox = screen.getByText(props.text)
 
@@ -62,7 +62,7 @@ describe('Random Quote Machine', () => {
   })
 
   test('On first load, my quote machine displays the random quote\'s author in the element with id="author"', () => {
-    customRender(<Quote />)
+    customRender(<RandomQuoteMachine />)
 
     const author = screen.getByText(props.author)
 
@@ -71,7 +71,7 @@ describe('Random Quote Machine', () => {
   })
 
   test('When the #new-quote button is clicked, my quote machine should fetch a new quote and display it in the #text element', async () => {
-    customRender(<Quote />)
+    customRender(<RandomQuoteMachine />)
     process.env.NEW_QUOTE = 'yes'
     userEvent.click(screen.getByText(/New Quote/))
 
@@ -85,7 +85,7 @@ describe('Random Quote Machine', () => {
   })
 
   test("My quote machine should fetch the new quote's author when the #new-quote button is clicked and display it in the #author element.", async () => {
-    customRender(<Quote />)
+    customRender(<RandomQuoteMachine />)
     process.env.NEW_QUOTE = 'yes'
     userEvent.click(screen.getByText(/New Quote/))
 
@@ -102,7 +102,7 @@ describe('Random Quote Machine', () => {
   })
 
   test('I can tweet the current quote by clicking on the #tweet-quote a element. This a element should include the "twitter.com/intent/tweet" path in its href attribute to tweet the current quote', () => {
-    customRender(<Quote />)
+    customRender(<RandomQuoteMachine />)
 
     const text = screen.getByText('Tweet this quote!')
     // eslint-disable-next-line testing-library/no-node-access

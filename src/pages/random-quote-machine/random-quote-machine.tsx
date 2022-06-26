@@ -3,8 +3,8 @@ import { FC } from 'react'
 import ContentLoader from 'react-content-loader'
 import { FaTwitter } from 'react-icons/fa'
 
-import { Button } from '../button'
-import { useQuote } from './quote.hooks'
+import { Button } from '../../components/button'
+import { useQuote } from './random-quote-machine.hooks'
 
 const tweetURL = (text: string, author: string) => {
   const url = new URL('https://twitter.com/intent/tweet')
@@ -13,7 +13,7 @@ const tweetURL = (text: string, author: string) => {
   return url.toString()
 }
 
-export const Quote: FC = () => {
+export const RandomQuoteMachine: FC = () => {
   const { data, refetch } = useQuote()
 
   return (

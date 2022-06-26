@@ -1,7 +1,7 @@
 import { lazy } from 'react'
 import { RouteProps } from 'react-router-dom'
 
-const Quote = lazy(() => import('./components/quote'))
+const RandomQuoteMachine = lazy(() => import('./pages/random-quote-machine'))
 
 type Routes = {
   title: string
@@ -10,7 +10,7 @@ type Routes = {
 export const routes: Routes[] = [
   {
     title: 'Random Quote Machine',
-    element: <Quote />,
+    element: <RandomQuoteMachine />,
     path: 'random-quote-machine',
   },
 ]

@@ -1,16 +1,18 @@
 import { ComponentStory, ComponentMeta } from '@storybook/react'
 
 import { worker } from '../../mocks/browser'
-import { Quote } from './quote'
+import { RandomQuoteMachine } from './random-quote-machine'
 
 import { rest } from 'msw'
 
 export default {
-  title: 'Quote',
-  component: Quote,
-} as ComponentMeta<typeof Quote>
+  title: 'RandomQuoteMachine',
+  component: RandomQuoteMachine,
+} as ComponentMeta<typeof RandomQuoteMachine>
 
-const Template: ComponentStory<typeof Quote> = (args) => <Quote {...args} />
+const Template: ComponentStory<typeof RandomQuoteMachine> = (args) => (
+  <RandomQuoteMachine {...args} />
+)
 
 export const Default = Template.bind({})
 
