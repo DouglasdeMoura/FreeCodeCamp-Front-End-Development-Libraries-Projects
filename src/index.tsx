@@ -1,8 +1,9 @@
+import { lazy } from 'react'
 import { createRoot } from 'react-dom/client'
 import { QueryClient, QueryClientProvider } from 'react-query'
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
 
-import { Quote } from './components/quote'
+const Quote = lazy(() => import('./components/quote'))
 
 if (import.meta.env.MODE === 'development') {
   const { worker } = await import('./mocks/browser')

@@ -1,1 +1,1 @@
-export * from './quote'
+export { Quote as default } from './quote'
