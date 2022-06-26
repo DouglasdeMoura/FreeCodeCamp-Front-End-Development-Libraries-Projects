@@ -3,7 +3,7 @@ import { createRoot } from 'react-dom/client'
 import { QueryClient, QueryClientProvider } from 'react-query'
 import { BrowserRouter, Routes, Route, Outlet } from 'react-router-dom'
 
-const Quote = React.lazy(() => import('./components/quote'))
+import { routes } from './routes'
 
 if (import.meta.env.MODE === 'development') {
   const { worker } = await import('./mocks/browser')
@@ -24,7 +24,9 @@ const App = () => (
     <BrowserRouter>
       <Routes>
         <Route path="/" element={<SuspendedRoute />}>
-          <Route path="random-quote-machine" element={<Quote />} />
+          {routes.map((props) => (
+            <Route {...props} key={props.path} />
+          ))}
         </Route>
       </Routes>
     </BrowserRouter>
