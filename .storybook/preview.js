@@ -2,7 +2,9 @@ import { createElement as h } from 'react'
 import { QueryClient, QueryClientProvider } from 'react-query'
 import { worker } from '../src/mocks/browser'
 
-worker.start()
+if (typeof window !== 'undefined') {
+  worker.start()
+}
 
 export const parameters = {
   actions: { argTypesRegex: '^on[A-Z].*' },
