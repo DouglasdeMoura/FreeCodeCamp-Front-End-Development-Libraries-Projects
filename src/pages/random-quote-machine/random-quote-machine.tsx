@@ -1,4 +1,3 @@
-import '../../styles/global.css'
 import { FC } from 'react'
 import ContentLoader from 'react-content-loader'
 import { FaTwitter } from 'react-icons/fa'
