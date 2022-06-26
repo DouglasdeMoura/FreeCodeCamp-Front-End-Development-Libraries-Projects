@@ -17,7 +17,13 @@ const SuspendedRoute: React.FC = () => (
   </React.Suspense>
 )
 
-const queryClient = new QueryClient()
+const queryClient = new QueryClient({
+  defaultOptions: {
+    queries: {
+      suspense: true,
+    },
+  },
+})
 
 const App = () => (
   <QueryClientProvider client={queryClient}>
