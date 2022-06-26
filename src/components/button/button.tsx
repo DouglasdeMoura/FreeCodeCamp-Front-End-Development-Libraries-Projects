@@ -1,8 +1,11 @@
 import { FC, forwardRef } from 'react'
 
+import { Slot } from '@radix-ui/react-slot'
+
 type ButtonProps = {
   children?: React.ReactNode
   variant?: 'primary' | 'secondary'
+  asChild?: boolean
 } & React.ComponentPropsWithRef<'button'>
 
 const primary =
@@ -12,9 +15,11 @@ const secondary =
   'inline-block py-2 px-6 text-xs font-medium leading-tight text-blue-600 uppercase rounded border-2 border-blue-600 focus:outline-none focus:ring-0 transition duration-150 ease-in-out'
 
 export const Button: FC<ButtonProps> = forwardRef(
-  ({ children, variant = 'primary', className, ...props }, ref) => {
+  ({ children, variant = 'primary', className, asChild, ...props }, ref) => {
+    const Component = asChild ? Slot : 'button'
+
     return (
-      <button
+      <Component
         {...props}
         className={`${className} ${
           variant === 'primary' ? primary : secondary
@@ -22,7 +27,7 @@ export const Button: FC<ButtonProps> = forwardRef(
         ref={ref}
       >
         {children}
-      </button>
+      </Component>
     )
   },
 )
