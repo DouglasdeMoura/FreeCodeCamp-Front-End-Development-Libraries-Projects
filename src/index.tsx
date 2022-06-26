@@ -1,4 +1,4 @@
-import { lazy } from 'react'
+import { lazy, StrictMode } from 'react'
 import { createRoot } from 'react-dom/client'
 import { QueryClient, QueryClientProvider } from 'react-query'
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
@@ -28,4 +28,8 @@ const App = () => (
 const container = document.getElementById('app')
 const root = createRoot(container!)
 
-root.render(<App />)
+root.render(
+  <StrictMode>
+    <App />
+  </StrictMode>,
+)
