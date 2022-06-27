@@ -15,7 +15,14 @@ export function querySelector<T extends Element>(
 
 export * from '@testing-library/react'
 
-const queryClient = new QueryClient()
+const queryClient = new QueryClient({
+  defaultOptions: {
+    queries: {
+      suspense: true,
+      retry: false,
+    },
+  },
+})
 
 export const customRender = (
   ui: React.ReactElement,
