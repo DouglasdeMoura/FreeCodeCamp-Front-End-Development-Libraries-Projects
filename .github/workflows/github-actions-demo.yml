@@ -1,8 +1,5 @@
 name: FreeCodeCamp's Front End Development Libraries Projects
-on:
-  push:
-    branches:
-      - master
+on: [push]
 
 jobs:
   deploy:
