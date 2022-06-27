@@ -4,6 +4,8 @@ on: [push]
 jobs:
   deploy:
     runs-on: ubuntu-20.04
+    env:
+      API_BASE_URL: ${{ secrets.API_BASE_URL }}
     steps:
       - uses: actions/checkout@v2
       - uses: actions/setup-node@v1
