@@ -1,5 +1,7 @@
 import userEvent from '@testing-library/user-event'
 
+import { testQuotesHandler } from '../../mocks/handlers'
+import { server } from '../../mocks/server'
 import {
   querySelector,
   customRender,
@@ -8,11 +10,9 @@ import {
 } from '../../utils/test-utils'
 import { RandomQuoteMachine } from './random-quote-machine'
 
-const props = { text: 'mock_quote', author: 'mock_author' }
-
 describe('<RandomQuoteMachine />', () => {
-  afterEach(() => {
-    process.env.NEW_QUOTE = ''
+  beforeAll(() => {
+    server.use(testQuotesHandler)
   })
 
   test('I can see a wrapper element with a corresponding id="quote-box"', async () => {
@@ -58,7 +58,7 @@ describe('<RandomQuoteMachine />', () => {
   test('On first load, my quote machine displays a random quote in the element with id="text"', () => {
     customRender(<RandomQuoteMachine />)
 
-    const quoteBox = screen.getByText(props.text)
+    const quoteBox = screen.getByTestId('text')
 
     expect(quoteBox).toBeInTheDocument()
     expect(quoteBox).toHaveAttribute('id', 'text')
@@ -67,7 +67,7 @@ describe('<RandomQuoteMachine />', () => {
   test('On first load, my quote machine displays the random quote\'s author in the element with id="author"', () => {
     customRender(<RandomQuoteMachine />)
 
-    const author = screen.getByText(props.author)
+    const author = screen.getByTestId('author')
 
     expect(author).toBeInTheDocument()
     expect(author).toHaveAttribute('id', 'author')
@@ -75,15 +75,16 @@ describe('<RandomQuoteMachine />', () => {
 
   test('When the #new-quote button is clicked, my quote machine should fetch a new quote and display it in the #text element', async () => {
     customRender(<RandomQuoteMachine />)
-    process.env.NEW_QUOTE = 'yes'
     userEvent.click(screen.getByText(/New Quote/))
 
+    const text = screen.getByTestId('text')?.textContent
+
     await waitFor(() => {
-      expect(screen.getByText('new_mock_quote')).toBeInTheDocument()
+      expect(screen.getByTestId('text').textContent === text).toBe(false)
     })
 
     await waitFor(() => {
-      expect(screen.getByText('new_mock_quote')).toHaveAttribute('id', 'text')
+      expect(screen.getByTestId('text')).toHaveAttribute('id', 'text')
     })
   })
 
@@ -107,15 +108,18 @@ describe('<RandomQuoteMachine />', () => {
   test('I can tweet the current quote by clicking on the #tweet-quote a element. This a element should include the "twitter.com/intent/tweet" path in its href attribute to tweet the current quote', () => {
     customRender(<RandomQuoteMachine />)
 
-    const text = screen.getByText('Tweet this quote!')
+    const cta = screen.getByText('Tweet this quote!')
     // eslint-disable-next-line testing-library/no-node-access
-    const tweetThis = text?.parentElement as HTMLAnchorElement
+    const tweetThis = cta?.parentElement as HTMLAnchorElement
+
+    const text = screen.getByTestId('text')
+    const author = screen.getByTestId('author')
 
     expect(tweetThis).toHaveAttribute('id', 'tweet-quote')
     expect(tweetThis).toHaveAttribute('target', '_blank')
     expect(tweetThis).toHaveAttribute(
       'href',
-      'https://twitter.com/intent/tweet?text=%22new_mock_quote%22+new_mock_author',
+      `https://twitter.com/intent/tweet?text=%22${text.textContent}%22+${author.textContent}`,
     )
   })
 })

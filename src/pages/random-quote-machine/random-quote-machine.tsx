@@ -13,7 +13,7 @@ const tweetURL = (text: string, author: string) => {
 }
 
 export const RandomQuoteMachine: FC = () => {
-  const { data, refetch } = useQuote()
+  const { quote, getNewRandomQuote } = useQuote()
 
   return (
     <>
@@ -22,9 +22,13 @@ export const RandomQuoteMachine: FC = () => {
         className="flex flex-col gap-4 p-6 max-w-md bg-slate-200 rounded-lg"
       >
         <figure className="flex flex-col gap-2">
-          <blockquote id="text" className="flex gap-4 justify-between text-xl">
-            {data?.text ? (
-              data?.text
+          <blockquote
+            id="text"
+            className="flex gap-4 justify-between text-xl"
+            data-testid="text"
+          >
+            {quote?.text ? (
+              quote?.text
             ) : (
               <ContentLoader viewBox={`0 0 380 60`}>
                 <rect x="0" y="0" rx="4" ry="4" width="300" height="25" />
@@ -35,9 +39,10 @@ export const RandomQuoteMachine: FC = () => {
           <figcaption
             id="author"
             className="flex gap-4 justify-between font-bold"
+            data-testid="author"
           >
-            {data?.author ? (
-              data?.author
+            {quote?.author ? (
+              quote?.author
             ) : (
               <ContentLoader viewBox={`0 0 380 32`}>
                 <rect x="0" y="16" rx="4" ry="4" width="300" height="16" />
@@ -48,7 +53,7 @@ export const RandomQuoteMachine: FC = () => {
         <div className="flex gap-4 justify-between align-middle">
           <Button variant="secondary" asChild>
             <a
-              href={tweetURL(data?.text || '', data?.author || '')}
+              href={tweetURL(quote?.text || '', quote?.author || '')}
               id="tweet-quote"
               target="_blank"
               rel="noreferrer"
@@ -57,7 +62,11 @@ export const RandomQuoteMachine: FC = () => {
               <span className="sr-only">Tweet this quote!</span>
             </a>
           </Button>
-          <Button id="new-quote" onClick={() => refetch()} type="button">
+          <Button
+            id="new-quote"
+            onClick={() => getNewRandomQuote()}
+            type="button"
+          >
             New Quote
           </Button>
         </div>

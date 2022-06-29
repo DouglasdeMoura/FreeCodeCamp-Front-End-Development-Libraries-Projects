@@ -1,3 +1,4 @@
+import { useEffect, useState } from 'react'
 import { useQuery } from 'react-query'
 
 import { api } from '../../api/client'
@@ -24,10 +25,29 @@ const useQuotes = () =>
   })
 
 export const useQuote = () => {
-  const { data, ...args } = useQuotes()
+  const [randomQuote, setRandomQuote] = useState<Quote>()
+  const { data } = useQuotes()
+
+  const getNewRandomQuote = () => {
+    if (data) {
+      const quote = getRandomItem(data)
+
+      if (randomQuote?.text === quote?.text) {
+        getNewRandomQuote()
+      } else {
+        setRandomQuote(quote)
+      }
+    }
+  }
+
+  useEffect(() => {
+    if (data) {
+      setRandomQuote(getRandomItem(data))
+    }
+  }, [data])
 
   return {
-    ...args,
-    data: data && getRandomItem(data),
+    quote: data && randomQuote,
+    getNewRandomQuote,
   }
 }

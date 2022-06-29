@@ -1,5 +1,14 @@
 import { rest } from 'msw'
 
+export const testQuotesHandler = rest.get('/quotes', (_req, res, ctx) => {
+  const response = [
+    { text: 'new_mock_quote', author: 'new_mock_author' },
+    { text: 'mock_quote', author: 'mock_author' },
+  ]
+
+  return res(ctx.status(200), ctx.json(response))
+})
+
 export const handlers = [
   rest.get('/quotes', (_req, res, ctx) => {
     if (process.env.NODE_ENV === 'test') {
