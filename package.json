@@ -1,14 +1,13 @@
 {
-  "name": "react-starter",
+  "name": "frontend-development-libraries-project",
   "version": "1.0.0",
-  "description": "React project starter with Prettier, ESlint, Commitlint, Storybook and Jest.",
-  "repository": "https://github.com/douglasdemoura/react-starter",
+  "description": "Contains the front end development projects challenges from FreeCodeCamp",
+  "repository": "https://github.com/DouglasdeMoura/FreeCodeCamp-Front-End-Development-Libraries-Projects",
   "author": "Douglas Moura <douglas.ademoura@gmail.com> (https://douglasmoura.dev)",
   "license": "MIT",
-  "source": "src/index.html",
   "scripts": {
     "dev": "vite",
-    "build": "tsc && vite build",
+    "build": "tsc && vite build --base=/FreeCodeCamp-Front-End-Development-Libraries-Projects/",
     "preview": "vite preview",
     "storybook": "start-storybook -p 6006",
     "build-storybook": "build-storybook --output-dir storybook",
