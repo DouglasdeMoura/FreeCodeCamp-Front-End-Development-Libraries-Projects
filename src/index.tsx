@@ -3,7 +3,7 @@ import './styles/global.css'
 import React from 'react'
 import { createRoot } from 'react-dom/client'
 import { QueryClient, QueryClientProvider } from 'react-query'
-import { BrowserRouter, Routes, Route, Outlet } from 'react-router-dom'
+import { HashRouter, Routes, Route, Outlet } from 'react-router-dom'
 
 import { ErrorBoundary } from './components/error-boundary'
 import Home from './pages/home'
@@ -35,7 +35,7 @@ const queryClient = new QueryClient({
 
 const App = () => (
   <QueryClientProvider client={queryClient}>
-    <BrowserRouter basename={process.env.ROUTER_BASENAME}>
+    <HashRouter basename={process.env.ROUTER_BASENAME}>
       <Routes>
         <Route path="/" element={<SuspendedRoute />}>
           {routes.map((props) => (
@@ -44,7 +44,7 @@ const App = () => (
           <Route index element={<Home />} />
         </Route>
       </Routes>
-    </BrowserRouter>
+    </HashRouter>
   </QueryClientProvider>
 )
 
