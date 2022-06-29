@@ -15,15 +15,18 @@ describe('<RandomQuoteMachine />', () => {
     process.env.NEW_QUOTE = ''
   })
 
-  test('I can see a wrapper element with a corresponding id="quote-box"', () => {
+  test('I can see a wrapper element with a corresponding id="quote-box"', async () => {
     const { container } = customRender(<RandomQuoteMachine />)
-
-    expect(querySelector(container, '#quote-box')).not.toBeNull()
+    await waitFor(() =>
+      expect(querySelector(container, '#quote-box')).not.toBeNull(),
+    )
   })
 
-  test('Within #quote-box, I can see an element with corresponding id="text"', () => {
+  test('Within #quote-box, I can see an element with corresponding id="text"', async () => {
     const { container } = customRender(<RandomQuoteMachine />)
-    expect(querySelector(container, '#quote-box #text')).not.toBeNull()
+    await waitFor(() =>
+      expect(querySelector(container, '#quote-box #text')).not.toBeNull(),
+    )
   })
 
   test('Within #quote-box, I can see an element with corresponding id="author".', () => {
