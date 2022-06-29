@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "description": "Contains the front end development projects challenges from FreeCodeCamp",
   "repository": "https://github.com/DouglasdeMoura/FreeCodeCamp-Front-End-Development-Libraries-Projects",
+  "homepage": "https://douglasdemoura.github.io/FreeCodeCamp-Front-End-Development-Libraries-Projects/",
   "author": "Douglas Moura <douglas.ademoura@gmail.com> (https://douglasmoura.dev)",
   "license": "MIT",
   "scripts": {
