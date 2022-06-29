@@ -6,7 +6,6 @@ jobs:
     runs-on: ubuntu-20.04
     env:
       API_BASE_URL: ${{ secrets.API_BASE_URL }}
-      ROUTER_BASENAME: ${{ secrets.ROUTER_BASENAME }}
     steps:
       - uses: actions/checkout@v2
       - uses: actions/setup-node@v1
