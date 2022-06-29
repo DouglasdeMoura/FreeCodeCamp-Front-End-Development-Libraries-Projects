@@ -7,6 +7,10 @@ const ThrowError = () => {
 }
 
 describe('<ErrorBoundary />', () => {
+  beforeEach(() => {
+    jest.spyOn(console, 'error').mockImplementation(() => null)
+  })
+
   it('should display the error message from the children components', () => {
     render(
       <ErrorBoundary>
