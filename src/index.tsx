@@ -35,7 +35,7 @@ const queryClient = new QueryClient({
 
 const App = () => (
   <QueryClientProvider client={queryClient}>
-    <BrowserRouter>
+    <BrowserRouter basename={process.env.ROUTER_BASENAME}>
       <Routes>
         <Route path="/" element={<SuspendedRoute />}>
           {routes.map((props) => (
