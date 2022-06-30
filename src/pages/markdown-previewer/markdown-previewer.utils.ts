@@ -1,13 +1,12 @@
 import DOMPurify from 'dompurify'
-import katex from 'katex'
+import katex, { KatexOptions } from 'katex'
 import { marked } from 'marked'
 import Prism from 'prismjs'
 
-const renderKatex = (math: string, block?: boolean) =>
+const renderKatex = (math: string, options?: KatexOptions) =>
   katex.renderToString(math, {
     throwOnError: false,
-    displayMode: block,
-    output: 'htmlAndMathml',
+    ...options,
   })
 
 marked.use({
@@ -30,7 +29,7 @@ marked.use({
         }
       },
       renderer(token) {
-        const formula = renderKatex(token.formula, true)
+        const formula = renderKatex(token.formula, { displayMode: true })
         return `<div class="katex-block">${formula}</div>`
       },
     },
