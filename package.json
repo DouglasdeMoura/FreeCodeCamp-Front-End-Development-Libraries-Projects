@@ -35,6 +35,7 @@
     "react-icons": "^4.4.0",
     "react-query": "^3.39.1",
     "react-router-dom": "6",
+    "react-use-sync-scroll": "^0.1.0",
     "vite": "^2.9.12"
   },
   "devDependencies": {

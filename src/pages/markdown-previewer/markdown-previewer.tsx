@@ -3,12 +3,20 @@ import 'katex/dist/katex.min.css'
 import './markdown-previewer.css'
 
 import { FC, useEffect, useRef } from 'react'
+import useSyncScroll from 'react-use-sync-scroll'
 
 import { DEFAULT_VALUE } from './markdown-previewer.constants'
 import { parseMarkdown } from './markdown-previewer.utils'
 
 export const MarkdownPreviewer: FC = () => {
+  const previewContainerRef = useRef<HTMLDivElement>(null)
   const previewRef = useRef<HTMLDivElement>(null)
+  const editorRef = useRef<HTMLTextAreaElement>(null)
+  const two = useRef([previewContainerRef, editorRef])
+
+  useSyncScroll(two, {
+    vertical: true,
+  })
 
   useEffect(() => {
     if (previewRef.current) {
@@ -18,13 +26,14 @@ export const MarkdownPreviewer: FC = () => {
 
   return (
     <div className="flex flex-col w-screen h-full bg-white sm:flex-row">
-      <div className="overflow-hidden h-1/2 sm:w-1/2 sm:h-screen">
+      <div className="overflow-hidden h-1/2 resize-y sm:w-1/2 sm:h-screen sm:resize-x">
         <textarea
           id="editor"
           data-testid="editor"
           className="overflow-auto p-4 w-full h-full max-h-screen font-mono bg-slate-300 resize-none"
           placeholder="Write your markdown here"
           defaultValue={DEFAULT_VALUE}
+          ref={editorRef}
           onChange={(e) => {
             if (previewRef.current) {
               previewRef.current.innerHTML = parseMarkdown(e.target.value)
@@ -32,7 +41,10 @@ export const MarkdownPreviewer: FC = () => {
           }}
         ></textarea>
       </div>
-      <div className="overflow-auto py-8 px-4 max-w-full h-1/2 bg-white sm:w-1/2 sm:h-screen">
+      <div
+        className="overflow-hidden py-8 px-4 h-1/2 bg-white sm:w-full sm:h-screen"
+        ref={previewContainerRef}
+      >
         <div
           id="preview"
           data-testid="preview"

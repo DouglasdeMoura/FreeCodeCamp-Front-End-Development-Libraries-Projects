@@ -9,7 +9,7 @@ import { ErrorBoundary } from './components/error-boundary'
 import Home from './pages/home'
 import { routes } from './routes'
 
-if (import.meta.env.MODE === 'development') {
+if (import.meta.env.MODE === 'development2') {
   const { worker } = await import('./mocks/browser')
 
   worker.start()
