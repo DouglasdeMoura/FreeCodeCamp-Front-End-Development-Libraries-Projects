@@ -38,6 +38,7 @@ export const MarkdownPreviewer: FC = () => {
           defaultValue={DEFAULT_VALUE}
           ref={editorRef}
           onChange={(e) => insertParsedMarkdown(e.currentTarget.value)}
+          spellCheck={false}
         ></textarea>
       </div>
       <div
