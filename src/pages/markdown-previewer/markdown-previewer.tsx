@@ -12,16 +12,19 @@ export const MarkdownPreviewer: FC = () => {
   const previewContainerRef = useRef<HTMLDivElement>(null)
   const previewRef = useRef<HTMLDivElement>(null)
   const editorRef = useRef<HTMLTextAreaElement>(null)
-  const two = useRef([previewContainerRef, editorRef])
 
-  useSyncScroll(two, {
+  const insertParsedMarkdown = (value: string) => {
+    if (previewRef.current) {
+      previewRef.current.innerHTML = parseMarkdown(value)
+    }
+  }
+
+  useSyncScroll(useRef([previewContainerRef, editorRef]), {
     vertical: true,
   })
 
   useEffect(() => {
-    if (previewRef.current) {
-      previewRef.current.innerHTML = parseMarkdown(DEFAULT_VALUE)
-    }
+    insertParsedMarkdown(DEFAULT_VALUE)
   }, [previewRef])
 
   return (
@@ -34,11 +37,7 @@ export const MarkdownPreviewer: FC = () => {
           placeholder="Write your markdown here"
           defaultValue={DEFAULT_VALUE}
           ref={editorRef}
-          onChange={(e) => {
-            if (previewRef.current) {
-              previewRef.current.innerHTML = parseMarkdown(e.target.value)
-            }
-          }}
+          onChange={(e) => insertParsedMarkdown(e.currentTarget.value)}
         ></textarea>
       </div>
       <div
