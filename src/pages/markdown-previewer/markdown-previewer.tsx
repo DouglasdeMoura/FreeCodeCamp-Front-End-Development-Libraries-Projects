@@ -1,4 +1,5 @@
 import 'dracula-prism/dist/css/dracula-prism.css'
+import 'katex/dist/katex.min.css'
 import './markdown-previewer.css'
 
 import { FC, useEffect, useRef } from 'react'

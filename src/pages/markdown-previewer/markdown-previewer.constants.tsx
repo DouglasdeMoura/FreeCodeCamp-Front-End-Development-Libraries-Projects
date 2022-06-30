@@ -36,6 +36,12 @@ And here. | Okay. | I think we get it.
         - That look like this.
 
 
+You may write math:
+
+When $a ${String.raw`\ne`} 0$, there are two solutions to $(ax^2 + bx + c = 0)$ and they are
+
+$$ x = {-b ${String.raw`\pm`} ${String.raw`\sqrt{b^2-4ac}`} ${String.raw`\over`} 2a} $$
+
 1. And there are numbered lists too.
 1. Use just 1s if you want!
 1. And last but not least, let's not forget embedded images:
