@@ -26,11 +26,11 @@ export const MarkdownPreviewer: FC = () => {
 
   return (
     <div className="flex flex-col w-screen h-full bg-white sm:flex-row">
-      <div className="overflow-hidden h-1/2 resize-y sm:w-1/2 sm:h-screen sm:resize-x">
+      <div className="overflow-hidden w-full h-1/2 resize-y sm:h-screen sm:resize-x">
         <textarea
           id="editor"
           data-testid="editor"
-          className="overflow-auto p-4 w-full h-full max-h-screen font-mono bg-slate-300 resize-none"
+          className="overflow-auto p-4 w-full min-w-max h-full max-h-screen font-mono bg-slate-300 resize-none"
           placeholder="Write your markdown here"
           defaultValue={DEFAULT_VALUE}
           ref={editorRef}
@@ -42,7 +42,7 @@ export const MarkdownPreviewer: FC = () => {
         ></textarea>
       </div>
       <div
-        className="overflow-hidden py-8 px-4 h-1/2 bg-white sm:w-full sm:h-screen"
+        className="overflow-hidden py-8 px-4 w-full h-1/2 bg-white sm:h-screen"
         ref={previewContainerRef}
       >
         <div
