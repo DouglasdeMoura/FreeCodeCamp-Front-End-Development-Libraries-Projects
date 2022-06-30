@@ -1,7 +1,10 @@
-# React Starter
+# My FreeCodecamp Front End Development Libraries Projects
 
-Using it:
+This repo contains all my projects for the FreeCodeCamp Frontend Development Libraries certification:
 
-```
-npx degit douglasdemoura/react-starter
-```
+- [Random Quote Machine](https://douglasdemoura.github.io/FreeCodeCamp-Front-End-Development-Libraries-Projects/#/random-quote-machine)
+- [Markdown Previwer](https://douglasdemoura.github.io/FreeCodeCamp-Front-End-Development-Libraries-Projects/#/markdown-previewer)
+
+## License
+
+[MIT](./LICENSE.txt)
