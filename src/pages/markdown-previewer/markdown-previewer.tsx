@@ -48,7 +48,7 @@ export const MarkdownPreviewer: FC = () => {
         <div
           id="preview"
           data-testid="preview"
-          className="m-auto prose prose-slate"
+          className="prose-code:py-0.5 prose-code:px-1 m-auto prose-code:before:content-none prose-code:after:content-none prose-code:bg-slate-200 prose-code:rounded prose prose-slate"
           ref={previewRef}
         />
       </div>
