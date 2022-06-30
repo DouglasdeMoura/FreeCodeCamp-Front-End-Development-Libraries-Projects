@@ -3,6 +3,7 @@ import { RouteProps } from 'react-router-dom'
 
 const RandomQuoteMachine = lazy(() => import('./pages/random-quote-machine'))
 const MarkdownPreviewer = lazy(() => import('./pages/markdown-previewer'))
+const DrumMachine = lazy(() => import('./pages/drum-machine'))
 
 type Routes = {
   title: string
@@ -18,5 +19,10 @@ export const routes: Routes[] = [
     title: 'Markdown Previewer',
     element: <MarkdownPreviewer />,
     path: 'markdown-previewer',
+  },
+  {
+    title: 'Drum Machine',
+    element: <DrumMachine />,
+    path: 'drum-machine',
   },
 ]
