@@ -26,8 +26,8 @@ export const MarkdownPreviewer: FC = () => {
   }, [previewRef])
 
   return (
-    <div className="flex gap-4 w-screen bg-white">
-      <div className="overflow-hidden w-1/2 h-screen">
+    <div className="flex flex-col w-screen h-full bg-white sm:flex-row">
+      <div className="overflow-hidden h-1/2 sm:w-1/2 sm:h-screen">
         <textarea
           id="editor"
           data-testid="editor"
@@ -41,7 +41,7 @@ export const MarkdownPreviewer: FC = () => {
           }}
         ></textarea>
       </div>
-      <div className="overflow-auto py-8 px-4 w-1/2 max-w-full h-screen max-h-screen bg-white">
+      <div className="overflow-auto py-8 px-4 max-w-full h-1/2 bg-white sm:w-1/2 sm:h-screen">
         <div
           id="preview"
           data-testid="preview"
