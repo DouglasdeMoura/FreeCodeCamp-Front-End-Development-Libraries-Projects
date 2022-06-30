@@ -2,6 +2,7 @@ import { render, screen, waitFor } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
 
 import { MarkdownPreviewer } from './markdown-previewer'
+import { parseMarkdown } from './markdown-previewer.utils'
 
 describe('<MarkdownPreviewer />', () => {
   test('I can see a textarea element with a corresponding id="editor"', () => {
@@ -28,5 +29,12 @@ describe('<MarkdownPreviewer />', () => {
     const hello = screen.getByText('Hello')
 
     expect(hello).toHaveAttribute('id', 'hello')
+  })
+})
+
+describe('parseMarkdown()', () => {
+  it('should return the sanitized HTML', () => {
+    expect(parseMarkdown('# Hello')).toBe('<h1 id="hello">Hello</h1>\n')
+    expect(parseMarkdown("<img src='javascript:while(1){}'>")).toBe('<img>')
   })
 })

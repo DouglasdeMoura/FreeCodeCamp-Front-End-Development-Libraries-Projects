@@ -4,24 +4,14 @@ import './markdown-previewer.css'
 import { FC, useEffect, useRef } from 'react'
 
 import { DEFAULT_VALUE } from './markdown-previewer.constants'
-
-import { marked } from 'marked'
-import Prism from 'prismjs'
-
-const parse = (content: string) =>
-  marked(content, {
-    breaks: true,
-    highlight: function (code, lang) {
-      return Prism.highlight(code, Prism.languages[lang], lang)
-    },
-  })
+import { parseMarkdown } from './markdown-previewer.utils'
 
 export const MarkdownPreviewer: FC = () => {
   const previewRef = useRef<HTMLDivElement>(null)
 
   useEffect(() => {
     if (previewRef.current) {
-      previewRef.current.innerHTML = parse(DEFAULT_VALUE)
+      previewRef.current.innerHTML = parseMarkdown(DEFAULT_VALUE)
     }
   }, [previewRef])
 
@@ -36,7 +26,7 @@ export const MarkdownPreviewer: FC = () => {
           defaultValue={DEFAULT_VALUE}
           onChange={(e) => {
             if (previewRef.current) {
-              previewRef.current.innerHTML = parse(e.target.value)
+              previewRef.current.innerHTML = parseMarkdown(e.target.value)
             }
           }}
         ></textarea>
