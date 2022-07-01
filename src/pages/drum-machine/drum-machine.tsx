@@ -88,6 +88,17 @@ export const DrumMachine: FC = () => {
       className="flex gap-4 justify-center items-center w-screen h-screen"
     >
       <div className="flex flex-col gap-4 justify-center items-center p-2 bg-white rounded scale-150">
+        <div
+          id="display"
+          data-testid="display"
+          ref={displayRef}
+          aria-label="Audio clip"
+          className="flex justify-center items-center pb-2 w-48 font-bold text-slate-900 border border-x-0 border-t-0 border-t-slate-300 min-h-9"
+        >
+          <span className="text-xs text-center">
+            Click on the pads or type the corresponding key to play the sound
+          </span>
+        </div>
         <div className="grid grid-cols-3 gap-2">
           {drumPadElements.map((drumPadElement) => (
             <Button
@@ -113,13 +124,6 @@ export const DrumMachine: FC = () => {
             </Button>
           ))}
         </div>
-        <div
-          id="display"
-          data-testid="display"
-          ref={displayRef}
-          aria-label="Audio clip"
-          className="flex justify-center items-center w-48  font-bold"
-        ></div>
       </div>
     </div>
   )
