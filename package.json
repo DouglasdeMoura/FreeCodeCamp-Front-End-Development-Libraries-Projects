@@ -27,6 +27,7 @@
     "jest-environment-jsdom": "^28.1.1",
     "katex": "^0.16.0",
     "marked": "^4.0.17",
+    "mathjs": "^10.6.4",
     "prismjs": "^1.28.0",
     "react": "^18.2.0",
     "react-content-loader": "^6.2.0",
