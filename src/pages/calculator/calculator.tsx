@@ -9,27 +9,63 @@ const EQUALS_ACTION = '='
 const BACKSPACE_ACTION = 'DEL'
 
 const buttons = [
-  { id: 'seven', value: 7, type: 'number' },
-  { id: 'eight', value: 8, type: 'number' },
-  { id: 'nine', value: 9, type: 'number' },
-  { id: 'backspace', value: BACKSPACE_ACTION, type: 'action' },
-  { id: 'clear', value: CLEAR_ACTION, type: 'action' },
+  {
+    id: 'add',
+    value: '+',
+    type: 'operator',
+    className: 'bg-slate-700 text-slate-50',
+  },
+  {
+    id: 'subtract',
+    value: '-',
+    type: 'operator',
+    className: 'bg-slate-700 text-slate-50',
+  },
+  {
+    id: 'multiply',
+    value: '*',
+    type: 'operator',
+    className: 'bg-slate-700 text-slate-50',
+  },
+  {
+    id: 'divide',
+    value: '/',
+    type: 'operator',
+    className: 'bg-slate-700 text-slate-50',
+  },
 
-  { id: 'four', value: 4, type: 'number' },
-  { id: 'five', value: 5, type: 'number' },
-  { id: 'six', value: 6, type: 'number' },
-  { id: 'multiply', value: '*', type: 'operator' },
-  { id: 'divide', value: '/', type: 'operator' },
+  { id: 'seven', value: 7, type: 'number', className: 'bg-slate-50' },
+  { id: 'eight', value: 8, type: 'number', className: 'bg-slate-50' },
+  { id: 'nine', value: 9, type: 'number', className: 'bg-slate-50' },
+  {
+    id: 'clear',
+    value: CLEAR_ACTION,
+    type: 'action',
+    className: 'bg-orange-500 text-slate-50',
+  },
 
-  { id: 'one', value: 1, type: 'number' },
-  { id: 'two', value: 2, type: 'number' },
-  { id: 'three', value: 3, type: 'number' },
-  { id: 'add', value: '+', type: 'operator' },
-  { id: 'subtract', value: '-', type: 'operator' },
+  { id: 'four', value: 4, type: 'number', className: 'bg-slate-50' },
+  { id: 'five', value: 5, type: 'number', className: 'bg-slate-50' },
+  { id: 'six', value: 6, type: 'number', className: 'bg-slate-50' },
+  {
+    id: 'backspace',
+    value: BACKSPACE_ACTION,
+    type: 'action',
+    className: 'bg-slate-50 col-start-4 col-end-5 row-start-3 row-end-5',
+  },
 
-  { id: 'zero', value: 0, type: 'number' },
-  { id: 'decimal', value: '.', type: 'sign' },
-  { id: 'equals', value: EQUALS_ACTION, type: 'action' },
+  { id: 'one', value: 1, type: 'number', className: 'bg-slate-50' },
+  { id: 'two', value: 2, type: 'number', className: 'bg-slate-50' },
+  { id: 'three', value: 3, type: 'number', className: 'bg-slate-50' },
+
+  { id: 'decimal', value: '.', type: 'sign', className: 'bg-slate-50' },
+  { id: 'zero', value: 0, type: 'number', className: 'bg-slate-50' },
+  {
+    id: 'equals',
+    value: EQUALS_ACTION,
+    type: 'action',
+    className: 'col-start-3 col-end-5 bg-sky-600 text-slate-50',
+  },
 ]
 
 const operators = buttons
@@ -166,19 +202,38 @@ export const Calculator: FC = () => {
   }, [])
 
   return (
-    <div className="flex flex-col">
+    <div
+      className="flex flex-col p-2 bg-slate-900 rounded-lg"
+      style={{ maxWidth: '200px' }}
+    >
       <div>
-        <input id="display" defaultValue={0} ref={displayRef} disabled />
+        <input
+          id="display"
+          className="py-4 px-2 mb-2 w-full font-mono text-xl text-right text-slate-50 bg-slate-900"
+          defaultValue={0}
+          ref={displayRef}
+          tabIndex={-1}
+          readOnly
+        />
       </div>
-      <div className="grid grid-cols-5">
-        {buttons.map(({ id, value, type }) => (
+      <div className="grid grid-cols-4 gap-1.5">
+        {buttons.map(({ id, value, type, className }) => (
           <button
             key={id}
             id={id}
             data-type={type}
             data-value={value}
             onClick={handleOnClick}
-            className="flex justify-center items-center p-4"
+            className={[
+              'flex',
+              'justify-center',
+              'items-center',
+              'p-2',
+              'rounded-md',
+              className,
+            ]
+              .filter((cn) => cn !== undefined)
+              .join(' ')}
           >
             {value}
           </button>
