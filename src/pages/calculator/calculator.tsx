@@ -77,7 +77,7 @@ const getDisplayOutput = ({ currentValue, type, value }: GetDisplayOutput) => {
 
   if (
     type === 'operator' &&
-    lastCharacter !== value && // Don't allow multiple operators in a row
+    !operators.includes(lastCharacter) && // Don't allow multiple operators in a row
     !operators.filter((operator) => operator === '-').includes(lastCharacter) && // Don't allow an operator to be placed after an operator
     !signs.includes(lastCharacter) // Don't allow the repetition of a sign
   ) {
