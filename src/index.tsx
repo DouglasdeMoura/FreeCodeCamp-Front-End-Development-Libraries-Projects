@@ -2,12 +2,13 @@ import './styles/global.css'
 
 import React from 'react'
 import { createRoot } from 'react-dom/client'
-import { QueryClient, QueryClientProvider } from 'react-query'
 import { HashRouter, Routes, Route, Outlet } from 'react-router-dom'
 
 import { ErrorBoundary } from './components/error-boundary'
 import Home from './pages/home'
 import { routes } from './routes'
+
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
 
 if (import.meta.env.MODE === 'development2') {
   const { worker } = await import('./mocks/browser')

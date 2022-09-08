@@ -1,5 +1,5 @@
 import { createElement as h } from 'react'
-import { QueryClient, QueryClientProvider } from 'react-query'
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
 import { worker } from '../src/mocks/browser'
 
 if (typeof window !== 'undefined') {

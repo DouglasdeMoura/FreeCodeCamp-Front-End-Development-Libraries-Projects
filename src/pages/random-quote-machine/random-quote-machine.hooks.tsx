@@ -1,7 +1,8 @@
 import { useEffect, useState } from 'react'
-import { useQuery } from 'react-query'
 
 import { api } from '../../api/client'
+
+import { useQuery } from '@tanstack/react-query'
 
 type Quote = {
   author: string
@@ -17,7 +18,7 @@ function getRandomItem<T = unknown>(arr: T[]) {
 const getQuotes = () => api.get<Quote[]>('/quotes').then((res) => res.data)
 
 const useQuotes = () =>
-  useQuery('quotes', getQuotes, {
+  useQuery(['quotes'], getQuotes, {
     retry: false,
     refetchOnWindowFocus: false,
     refetchOnReconnect: false,
