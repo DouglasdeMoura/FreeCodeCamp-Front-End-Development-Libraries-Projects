@@ -122,4 +122,20 @@ describe('<TwentyFivePlusFiveClock />', () => {
 
     expect(sessionLength).toHaveTextContent('24')
   })
+
+  test('When I click the element with the id of session-increment, the value within id="session-length" increments by a value of 1, and I can see the updated value', async () => {
+    const { user } = render(<TwentyFivePlusFiveClock />)
+
+    const increase = screen.getByTestId('session-increment')
+    const sessionLength = screen.getByTestId('session-length')
+
+    expect(sessionLength).toHaveAttribute('id', 'session-length')
+    expect(sessionLength).toHaveTextContent('5')
+    expect(increase).toHaveAttribute('id', 'session-increment')
+    expect(increase).toHaveTextContent('Increase')
+
+    await user.click(increase)
+
+    expect(sessionLength).toHaveTextContent('26')
+  })
 })
