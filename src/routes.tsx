@@ -5,6 +5,9 @@ const RandomQuoteMachine = lazy(() => import('./pages/random-quote-machine'))
 const MarkdownPreviewer = lazy(() => import('./pages/markdown-previewer'))
 const DrumMachine = lazy(() => import('./pages/drum-machine'))
 const Calculator = lazy(() => import('./pages/calculator'))
+const TwentyFivePlusFiveClock = lazy(
+  () => import('./pages/twenty-five-plus-five-clock'),
+)
 
 type Routes = {
   title: string
@@ -30,5 +33,10 @@ export const routes: Routes[] = [
     title: 'Calculator',
     element: <Calculator />,
     path: 'calculator',
+  },
+  {
+    title: '25 + 5 Clock',
+    element: <TwentyFivePlusFiveClock />,
+    path: 'twenty-five-plus-five-clock',
   },
 ]
