@@ -54,8 +54,16 @@ export const TwentyFivePlusFiveClock: React.FC = () => {
       </Button>
 
       <h2 id="session-label">Session Length</h2>
-      <p id="session-length">{sessionLength}</p>
-      <Button id="session-decrement" data-testid="session-decrement">
+      <p id="session-length" data-testid="session-length">
+        {sessionLength}
+      </p>
+      <Button
+        id="session-decrement"
+        data-testid="session-decrement"
+        onClick={() => {
+          setSessionLength(sessionLength - 1)
+        }}
+      >
         Decrease
       </Button>
       <Button id="session-increment" data-testid="session-increment">

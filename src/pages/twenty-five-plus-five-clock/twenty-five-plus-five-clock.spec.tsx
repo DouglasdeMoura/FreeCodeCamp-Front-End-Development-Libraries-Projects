@@ -106,4 +106,20 @@ describe('<TwentyFivePlusFiveClock />', () => {
 
     expect(breakLength).toHaveTextContent('4')
   })
+
+  test('When I click the element with the id of session-decrement, the value within id="session-length" decrements by a value of 1, and I can see the updated value', async () => {
+    const { user } = render(<TwentyFivePlusFiveClock />)
+
+    const decrease = screen.getByTestId('session-decrement')
+    const sessionLength = screen.getByTestId('session-length')
+
+    expect(sessionLength).toHaveAttribute('id', 'session-length')
+    expect(sessionLength).toHaveTextContent('5')
+    expect(decrease).toHaveAttribute('id', 'session-decrement')
+    expect(decrease).toHaveTextContent('Decrease')
+
+    await user.click(decrease)
+
+    expect(sessionLength).toHaveTextContent('24')
+  })
 })
