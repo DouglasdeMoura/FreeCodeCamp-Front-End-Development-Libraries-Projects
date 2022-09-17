@@ -1,4 +1,5 @@
 import * as testingLibrary from '@testing-library/react'
+import userEvent from '@testing-library/user-event'
 
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
 import assert from 'node:assert'
@@ -23,11 +24,13 @@ const queryClient = new QueryClient({
   },
 })
 
-export const customRender = (
+export const render = (
   ui: React.ReactElement,
   options?: testingLibrary.RenderOptions,
-) =>
-  testingLibrary.render(
+) => ({
+  user: userEvent.setup(),
+  ...testingLibrary.render(
     <QueryClientProvider client={queryClient}>{ui}</QueryClientProvider>,
     options,
-  )
+  ),
+})
