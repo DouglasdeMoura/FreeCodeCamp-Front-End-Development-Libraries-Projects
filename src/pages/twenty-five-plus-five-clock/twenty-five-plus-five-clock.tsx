@@ -31,8 +31,16 @@ export const TwentyFivePlusFiveClock: React.FC = () => {
       </Button>
 
       <h2 id="break-label">Break Length</h2>
-      <p id="break-length">{breakLength}</p>
-      <Button id="break-decrement" data-testid="break-decrement">
+      <p id="break-length" data-testid="break-length">
+        {breakLength}
+      </p>
+      <Button
+        id="break-decrement"
+        data-testid="break-decrement"
+        onClick={() => {
+          setBreakLength(breakLength - 1)
+        }}
+      >
         Decrease
       </Button>
       <Button id="break-increment" data-testid="break-increment">
