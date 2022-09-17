@@ -78,7 +78,17 @@ describe('<TwentyFivePlusFiveClock />', () => {
 
     expect(reset).toHaveAttribute('id', 'reset')
 
+    await repeat(() => user.click(screen.getByTestId('break-increment')), 5)
+    await repeat(() => user.click(screen.getByTestId('session-increment')), 5)
+
+    expect(screen.getByTestId('break-length')).toHaveTextContent('10')
+    expect(screen.getByTestId('session-length')).toHaveTextContent('30')
+
     await user.click(reset)
+
+    expect(screen.getByTestId('break-length')).toHaveTextContent('5')
+    expect(screen.getByTestId('session-length')).toHaveTextContent('25')
+    expect(screen.getByTestId('time-left')).toHaveTextContent('25:00')
   })
 
   test('When I click the element with the id of break-increment, the value within id="break-length" increments by a value of 1, and I can see the updated value', async () => {

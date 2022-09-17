@@ -25,7 +25,7 @@ export const TwentyFivePlusFiveClock: React.FC = () => {
           }
 
           if (sessionLength !== SESSION_LENGTH) {
-            setBreakLength(SESSION_LENGTH)
+            setSessionLength(SESSION_LENGTH)
           }
         }}
       >
@@ -87,7 +87,9 @@ export const TwentyFivePlusFiveClock: React.FC = () => {
       </Button>
 
       <p id="timer-label">Session</p>
-      <p id="time-left">{sessionLength}:00</p>
+      <p id="time-left" data-testid="time-left">
+        {sessionLength}:00
+      </p>
     </div>
   )
 }
