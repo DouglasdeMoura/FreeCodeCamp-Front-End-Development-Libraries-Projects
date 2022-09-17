@@ -78,15 +78,15 @@ describe('<TwentyFivePlusFiveClock />', () => {
   test('When I click the element with the id of break-increment, the value within id="break-length" increments by a value of 1, and I can see the updated value', async () => {
     const { user } = render(<TwentyFivePlusFiveClock />)
 
-    const decrease = screen.getByTestId('break-increment')
+    const increase = screen.getByTestId('break-increment')
     const breakLength = screen.getByTestId('break-length')
 
     expect(breakLength).toHaveAttribute('id', 'break-length')
     expect(breakLength).toHaveTextContent('5')
-    expect(decrease).toHaveAttribute('id', 'break-increment')
-    expect(decrease).toHaveTextContent('Increase')
+    expect(increase).toHaveAttribute('id', 'break-increment')
+    expect(increase).toHaveTextContent('Increase')
 
-    await user.click(decrease)
+    await user.click(increase)
 
     expect(breakLength).toHaveTextContent('6')
   })
