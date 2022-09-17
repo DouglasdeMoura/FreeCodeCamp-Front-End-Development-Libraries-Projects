@@ -4,6 +4,8 @@ import { Button } from '../../components/button'
 
 const BREAK_LENGTH = 5 // minutes
 const SESSION_LENGTH = 25 // minutes
+const TOP_LIMIT = 60
+const BOTTOM_LIMIT = 0
 
 export const TwentyFivePlusFiveClock: React.FC = () => {
   const [breakLength, setBreakLength] = useState(BREAK_LENGTH)
@@ -38,7 +40,7 @@ export const TwentyFivePlusFiveClock: React.FC = () => {
         id="break-decrement"
         data-testid="break-decrement"
         onClick={() => {
-          if (breakLength > 0) {
+          if (breakLength > BOTTOM_LIMIT) {
             setBreakLength(breakLength - 1)
           }
         }}
@@ -49,7 +51,9 @@ export const TwentyFivePlusFiveClock: React.FC = () => {
         id="break-increment"
         data-testid="break-increment"
         onClick={() => {
-          setBreakLength(breakLength + 1)
+          if (breakLength < TOP_LIMIT) {
+            setBreakLength(breakLength + 1)
+          }
         }}
       >
         Increase
@@ -63,7 +67,7 @@ export const TwentyFivePlusFiveClock: React.FC = () => {
         id="session-decrement"
         data-testid="session-decrement"
         onClick={() => {
-          if (sessionLength > 0) {
+          if (sessionLength > BOTTOM_LIMIT) {
             setSessionLength(sessionLength - 1)
           }
         }}
@@ -74,7 +78,9 @@ export const TwentyFivePlusFiveClock: React.FC = () => {
         id="session-increment"
         data-testid="session-increment"
         onClick={() => {
-          setSessionLength(sessionLength + 1)
+          if (sessionLength < TOP_LIMIT) {
+            setSessionLength(sessionLength + 1)
+          }
         }}
       >
         Increase

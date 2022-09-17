@@ -154,4 +154,14 @@ describe('<TwentyFivePlusFiveClock />', () => {
     expect(screen.getByTestId('break-length')).toHaveTextContent('0')
     expect(screen.getByTestId('session-length')).toHaveTextContent('0')
   })
+
+  test('I should not be able to set a session or break length to > 60', async () => {
+    const { user } = render(<TwentyFivePlusFiveClock />)
+
+    await repeat(() => user.click(screen.getByTestId('break-increment')), 56)
+    await repeat(() => user.click(screen.getByTestId('session-increment')), 36)
+
+    expect(screen.getByTestId('break-length')).toHaveTextContent('60')
+    expect(screen.getByTestId('session-length')).toHaveTextContent('60')
+  })
 })
