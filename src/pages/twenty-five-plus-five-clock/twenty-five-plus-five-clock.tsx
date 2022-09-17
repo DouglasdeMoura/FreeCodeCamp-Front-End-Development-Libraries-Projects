@@ -38,7 +38,9 @@ export const TwentyFivePlusFiveClock: React.FC = () => {
         id="break-decrement"
         data-testid="break-decrement"
         onClick={() => {
-          setBreakLength(breakLength - 1)
+          if (breakLength > 0) {
+            setBreakLength(breakLength - 1)
+          }
         }}
       >
         Decrease
@@ -61,7 +63,9 @@ export const TwentyFivePlusFiveClock: React.FC = () => {
         id="session-decrement"
         data-testid="session-decrement"
         onClick={() => {
-          setSessionLength(sessionLength - 1)
+          if (sessionLength > 0) {
+            setSessionLength(sessionLength - 1)
+          }
         }}
       >
         Decrease

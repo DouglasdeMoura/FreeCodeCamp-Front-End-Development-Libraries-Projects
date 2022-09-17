@@ -1,6 +1,12 @@
 import TwentyFivePlusFiveClock from '.'
 import { render, screen } from '../../utils/test-utils'
 
+async function repeat(fn: () => Promise<void>, repetitions: number) {
+  for (let i = 0; i < repetitions; i++) {
+    await fn()
+  }
+}
+
 describe('<TwentyFivePlusFiveClock />', () => {
   test('I can see an element with id="break-label" that contains a string (e.g. "Break Length")', () => {
     render(<TwentyFivePlusFiveClock />)
@@ -137,5 +143,15 @@ describe('<TwentyFivePlusFiveClock />', () => {
     await user.click(increase)
 
     expect(sessionLength).toHaveTextContent('26')
+  })
+
+  test('I should not be able to set a session or break length to <= 0', async () => {
+    const { user } = render(<TwentyFivePlusFiveClock />)
+
+    await repeat(() => user.click(screen.getByTestId('break-decrement')), 6)
+    await repeat(() => user.click(screen.getByTestId('session-decrement')), 26)
+
+    expect(screen.getByTestId('break-length')).toHaveTextContent('0')
+    expect(screen.getByTestId('session-length')).toHaveTextContent('0')
   })
 })
