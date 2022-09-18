@@ -1,4 +1,11 @@
-import { useEffect, useRef, useState } from 'react'
+import {
+  Dispatch,
+  SetStateAction,
+  useCallback,
+  useEffect,
+  useRef,
+  useState,
+} from 'react'
 
 import accurateInterval from 'accurate-interval'
 
@@ -88,4 +95,22 @@ export function useTimersLength(
       reset: resetSessionLen,
     },
   }
+}
+
+type UseBoolean = {
+  value: boolean
+  setValue: Dispatch<SetStateAction<boolean>>
+  setTrue: () => void
+  setFalse: () => void
+  toggle: () => void
+}
+
+export function useBoolean(defaultValue?: boolean): UseBoolean {
+  const [value, setValue] = useState(!!defaultValue)
+
+  const setTrue = useCallback(() => setValue(true), [])
+  const setFalse = useCallback(() => setValue(false), [])
+  const toggle = useCallback(() => setValue((x) => !x), [])
+
+  return { value, setValue, setTrue, setFalse, toggle }
 }
