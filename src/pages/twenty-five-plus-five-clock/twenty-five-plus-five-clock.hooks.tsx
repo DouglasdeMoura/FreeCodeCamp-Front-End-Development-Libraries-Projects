@@ -1,4 +1,7 @@
 import { useEffect, useRef } from 'react'
+
+import accurateInterval from 'accurate-interval'
+
 /**
  * Declare a function to be executed based on a
  * time interval. Based on Dan Abramov's post
@@ -23,8 +26,11 @@ export function useInterval(callback: () => void, delay: null | number) {
     }
 
     if (delay !== null) {
-      const id = setInterval(tick, delay)
-      return () => clearInterval(id)
+      const interval = accurateInterval(tick, delay, {
+        aligned: false,
+        immediate: false,
+      })
+      return () => interval.clear()
     }
   }, [delay])
 }

@@ -161,8 +161,8 @@ describe('<TwentyFivePlusFiveClock />', () => {
     await repeat(() => user.click(screen.getByTestId('break-decrement')), 6)
     await repeat(() => user.click(screen.getByTestId('session-decrement')), 26)
 
-    expect(screen.getByTestId('break-length')).toHaveTextContent('0')
-    expect(screen.getByTestId('session-length')).toHaveTextContent('0')
+    expect(screen.getByTestId('break-length')).toHaveTextContent('1')
+    expect(screen.getByTestId('session-length')).toHaveTextContent('1')
   })
 
   test('I should not be able to set a session or break length to > 60', async () => {
@@ -173,5 +173,10 @@ describe('<TwentyFivePlusFiveClock />', () => {
 
     expect(screen.getByTestId('break-length')).toHaveTextContent('60')
     expect(screen.getByTestId('session-length')).toHaveTextContent('60')
+  })
+
+  // eslint-disable-next-line jest/no-disabled-tests, jest/expect-expect
+  test.skip('When I first click the element with id="start_stop", the timer should begin running from the value currently displayed in id="session-length", even if the value has been incremented or decremented from the original value of 25', async () => {
+    // to be done
   })
 })
