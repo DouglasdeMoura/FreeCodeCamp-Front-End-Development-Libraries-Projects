@@ -37,7 +37,7 @@ export function useInterval(callback: () => void, delay: null | number) {
 
 type UseCounter = [number, () => void, () => void, () => void]
 
-export function useCounter(
+function useCounter(
   initial: number,
   topLimit?: number,
   bottomLimit?: number,
@@ -60,4 +60,32 @@ export function useCounter(
   }
 
   return [counter, increase, decrease, reset]
+}
+
+export function useTimersLength(
+  breakLength: number,
+  sessionLength: number,
+  topLimit: number,
+  bottomLimit: number,
+) {
+  const [breakLen, increaseBreakLen, decreaseBreakLen, resetBreakLen] =
+    useCounter(breakLength, topLimit, bottomLimit)
+
+  const [sessionLen, increaseSessionLen, decreaseSessionLen, resetSessionLen] =
+    useCounter(sessionLength, topLimit, bottomLimit)
+
+  return {
+    breakLength: {
+      counter: breakLen,
+      increase: increaseBreakLen,
+      decrease: decreaseBreakLen,
+      reset: resetBreakLen,
+    },
+    sessionLength: {
+      counter: sessionLen,
+      increase: increaseSessionLen,
+      decrease: decreaseSessionLen,
+      reset: resetSessionLen,
+    },
+  }
 }
