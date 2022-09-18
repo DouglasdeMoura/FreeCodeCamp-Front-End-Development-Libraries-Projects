@@ -8,6 +8,7 @@ import {
 } from 'react'
 
 import accurateInterval from 'accurate-interval'
+import { addMinutes, intervalToDuration } from 'date-fns'
 
 /**
  * Declare a function to be executed based on a
@@ -113,4 +114,59 @@ export function useBoolean(defaultValue?: boolean): UseBoolean {
   const toggle = useCallback(() => setValue((x) => !x), [])
 
   return { value, setValue, setTrue, setFalse, toggle }
+}
+
+type UseTimeArgs = {
+  start?: Date
+  time?: Date
+  sessionLength: number
+  breakLength: number
+  state: 'Session' | 'Break'
+  onZero?: () => void
+}
+
+export function useTimeLeft({
+  breakLength,
+  sessionLength,
+  start,
+  time,
+  state,
+  onZero,
+}: UseTimeArgs) {
+  if (!start || !time) {
+    return `${sessionLength}:00`
+  }
+
+  const now = new Date()
+  const end = start
+    ? addMinutes(start, state === 'Session' ? sessionLength : breakLength)
+    : addMinutes(now, state === 'Session' ? sessionLength : breakLength)
+
+  const timeLeft =
+    time && end
+      ? intervalToDuration({ start: time, end })
+      : intervalToDuration({ start: now, end })
+
+  const getFormattedTimeLeft = () => {
+    const minutes =
+      timeLeft?.hours === 1
+        ? 60
+        : timeLeft?.minutes?.toString().padStart(2, '0')
+    const seconds = timeLeft?.seconds?.toString().padStart(2, '0')
+
+    return `${minutes}:${seconds}`
+  }
+
+  if (
+    timeLeft.hours === 0 &&
+    timeLeft.minutes === 0 &&
+    timeLeft.seconds === 0
+  ) {
+    accurateInterval(() => onZero?.(), 1000, {
+      aligned: false,
+      immediate: false,
+    })
+  }
+
+  return getFormattedTimeLeft()
 }
