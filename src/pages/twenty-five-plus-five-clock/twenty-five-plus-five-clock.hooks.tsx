@@ -1,4 +1,4 @@
-import { useEffect, useRef } from 'react'
+import { useEffect, useRef, useState } from 'react'
 
 import accurateInterval from 'accurate-interval'
 
@@ -33,4 +33,31 @@ export function useInterval(callback: () => void, delay: null | number) {
       return () => interval.clear()
     }
   }, [delay])
+}
+
+type UseCounter = [number, () => void, () => void, () => void]
+
+export function useCounter(
+  initial: number,
+  topLimit?: number,
+  bottomLimit?: number,
+): UseCounter {
+  const [counter, setCounter] = useState(initial)
+  const increase = () => {
+    if (!topLimit || counter < topLimit) {
+      setCounter(counter + 1)
+    }
+  }
+
+  const decrease = () => {
+    if (!bottomLimit || counter > bottomLimit) {
+      setCounter(counter - 1)
+    }
+  }
+
+  const reset = () => {
+    setCounter(initial)
+  }
+
+  return [counter, increase, decrease, reset]
 }
