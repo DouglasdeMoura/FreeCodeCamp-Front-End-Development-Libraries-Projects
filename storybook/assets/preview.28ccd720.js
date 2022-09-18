@@ -1,2 +1,0 @@
-import{r as e}from"./jsx-runtime.8e91a126.js";import{w as t,Q as o,a}from"./index.707e0db8.js";import"./iframe.e0a1ade2.js";typeof window<"u"&&t.start();const l={actions:{argTypesRegex:"^on[A-Z].*"},controls:{matchers:{color:/(background|color)$/i,date:/Date$/}}},n=new o,m=[r=>e.exports.createElement(a,{client:n},e.exports.createElement(r))];export{m as decorators,l as parameters};
-//# sourceMappingURL=preview.28ccd720.js.map
