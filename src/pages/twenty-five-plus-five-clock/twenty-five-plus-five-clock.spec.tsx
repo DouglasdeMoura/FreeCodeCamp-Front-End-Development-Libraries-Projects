@@ -200,4 +200,32 @@ describe('<TwentyFivePlusFiveClock />', () => {
 
     expect(secondsAfter).toBeGreaterThan(secondsBefore)
   })
+
+  test('If the timer is running and I click the element with id="start_stop", the countdown should pause.', async () => {
+    const { user } = render(<TwentyFivePlusFiveClock />)
+    const playPause = () => user.click(screen.getByTestId('play-pause'))
+
+    await playPause()
+
+    const secondsBefore = getSeconds(
+      screen.getByTestId('time-left')!.textContent!,
+    )
+
+    await timeout(1500)
+
+    const secondsAfter = getSeconds(
+      screen.getByTestId('time-left')!.textContent!,
+    )
+
+    expect(secondsAfter).toBeGreaterThan(secondsBefore)
+
+    await playPause()
+    await timeout(1500)
+
+    const secondsAfterPause = getSeconds(
+      screen.getByTestId('time-left')!.textContent!,
+    )
+
+    expect(secondsAfter).toEqual(secondsAfterPause)
+  })
 })
