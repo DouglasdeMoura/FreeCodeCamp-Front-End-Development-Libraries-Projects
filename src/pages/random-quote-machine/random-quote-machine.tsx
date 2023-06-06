@@ -19,12 +19,12 @@ export const RandomQuoteMachine: FC = () => {
     <>
       <div
         id="quote-box"
-        className="flex flex-col gap-4 p-6 max-w-md bg-slate-200 rounded-lg"
+        className="flex max-w-md flex-col gap-4 rounded-lg bg-slate-200 p-6"
       >
         <figure className="flex flex-col gap-2">
           <blockquote
             id="text"
-            className="flex gap-4 justify-between text-xl"
+            className="flex justify-between gap-4 text-xl"
             data-testid="text"
           >
             {quote?.text ? (
@@ -38,7 +38,7 @@ export const RandomQuoteMachine: FC = () => {
           </blockquote>
           <figcaption
             id="author"
-            className="flex gap-4 justify-between font-bold"
+            className="flex justify-between gap-4 font-bold"
             data-testid="author"
           >
             {quote?.author ? (
@@ -50,7 +50,7 @@ export const RandomQuoteMachine: FC = () => {
             )}
           </figcaption>
         </figure>
-        <div className="flex gap-4 justify-between align-middle">
+        <div className="flex justify-between gap-4 align-middle">
           <Button variant="secondary" asChild>
             <a
               href={tweetURL(quote?.text || '', quote?.author || '')}

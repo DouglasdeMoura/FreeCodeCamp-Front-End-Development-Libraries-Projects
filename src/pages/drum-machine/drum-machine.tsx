@@ -85,17 +85,17 @@ export const DrumMachine: FC = () => {
     <div
       id="drum-machine"
       data-testid="drum-machine"
-      className="flex gap-4 justify-center items-center w-screen h-screen"
+      className="flex h-screen w-screen items-center justify-center gap-4"
     >
-      <div className="flex flex-col gap-4 justify-center items-center p-2 bg-white rounded scale-150">
+      <div className="flex scale-150 flex-col items-center justify-center gap-4 rounded bg-white p-2">
         <div
           id="display"
           data-testid="display"
           ref={displayRef}
           aria-label="Audio clip"
-          className="flex justify-center items-center pb-2 w-48 font-bold text-slate-900 border border-x-0 border-t-0 border-t-slate-300 min-h-9"
+          className="min-h-9 flex w-48 items-center justify-center border border-x-0 border-t-0 border-t-slate-300 pb-2 font-bold text-slate-900"
         >
-          <span className="text-xs text-center">
+          <span className="text-center text-xs">
             Click on the pads or type the corresponding key to play the sound
           </span>
         </div>
@@ -119,7 +119,7 @@ export const DrumMachine: FC = () => {
                 id={drumPadElement.key}
                 src={drumPadElement.audioClip}
                 data-name={drumPadElement.name}
-                className="hidden clip"
+                className="clip hidden"
               />
             </Button>
           ))}

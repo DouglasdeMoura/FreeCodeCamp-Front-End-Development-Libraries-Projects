@@ -60,7 +60,7 @@ describe('<DrumMachine />', () => {
       const audio = drumpad.querySelector('audio')
 
       expect(audio).toHaveAttribute('id', drumpad.textContent)
-      expect(audio).toHaveAttribute('class', 'hidden clip')
+      expect(audio).toHaveAttribute('class', 'clip hidden')
       expect(audio).toHaveAttribute('src')
       expect(audio?.src).toMatch(/\.mp3$/)
     })

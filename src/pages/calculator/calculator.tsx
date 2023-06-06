@@ -221,13 +221,13 @@ export const Calculator: FC = () => {
 
   return (
     <div
-      className="flex flex-col p-2 bg-slate-900 rounded-lg"
+      className="flex flex-col rounded-lg bg-slate-900 p-2"
       style={{ maxWidth: '200px' }}
     >
       <div>
         <input
           id="display"
-          className="py-4 px-2 mb-2 w-full font-mono text-xl text-right text-slate-50 bg-slate-900"
+          className="mb-2 w-full bg-slate-900 py-4 px-2 text-right font-mono text-xl text-slate-50"
           defaultValue={0}
           ref={displayRef}
           tabIndex={-1}

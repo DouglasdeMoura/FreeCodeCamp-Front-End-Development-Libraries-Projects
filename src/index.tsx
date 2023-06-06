@@ -17,7 +17,7 @@ if (import.meta.env.MODE === 'development2') {
 }
 
 const SuspendedRoute: React.FC = () => (
-  <div className="flex justify-center items-center w-screen h-screen bg-emerald-500">
+  <div className="flex h-screen w-screen items-center justify-center bg-emerald-500">
     <React.Suspense>
       <ErrorBoundary>
         <Outlet />
