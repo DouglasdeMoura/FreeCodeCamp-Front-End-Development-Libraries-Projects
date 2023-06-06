@@ -7,6 +7,14 @@ async function repeat(fn: () => Promise<void>, repetitions: number) {
   }
 }
 
+function getSeconds(text: string) {
+  const [, seconds] = text.split(':')
+  return Number(seconds)
+}
+
+const timeout = (milliseconds: number) =>
+  new Promise((resolve) => setTimeout(resolve, milliseconds))
+
 describe('<TwentyFivePlusFiveClock />', () => {
   test('I can see an element with id="break-label" that contains a string (e.g. "Break Length")', () => {
     render(<TwentyFivePlusFiveClock />)
@@ -175,8 +183,21 @@ describe('<TwentyFivePlusFiveClock />', () => {
     expect(screen.getByTestId('session-length')).toHaveTextContent('60')
   })
 
-  // eslint-disable-next-line jest/no-disabled-tests, jest/expect-expect
-  test.skip('When I first click the element with id="start_stop", the timer should begin running from the value currently displayed in id="session-length", even if the value has been incremented or decremented from the original value of 25', async () => {
-    // to be done
+  test('When I first click the element with id="start_stop", the timer should begin running from the value currently displayed in id="session-length", even if the value has been incremented or decremented from the original value of 25', async () => {
+    const { user } = render(<TwentyFivePlusFiveClock />)
+
+    const secondsBefore = getSeconds(
+      screen.getByTestId('time-left')!.textContent!,
+    )
+
+    await user.click(screen.getByTestId('play-pause'))
+
+    await timeout(1500)
+
+    const secondsAfter = getSeconds(
+      screen.getByTestId('time-left')!.textContent!,
+    )
+
+    expect(secondsAfter).toBeGreaterThan(secondsBefore)
   })
 })
