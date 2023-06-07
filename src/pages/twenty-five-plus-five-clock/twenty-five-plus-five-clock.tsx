@@ -99,18 +99,33 @@ export const TwentyFivePlusFiveClock: React.FC = () => {
   }
 
   return (
-    <div>
-      <Button
-        id="start_stop"
-        data-testid="play-pause"
-        onClick={() => setWhen((currentState) => !currentState)}
-      >
-        Play/Pause
-      </Button>
+    <div className="rounded bg-slate-300 p-4">
+      <div className="mb-4">
+        <p id="timer-label" className="text-sm text-slate-600">
+          {state}
+        </p>
+        <p
+          id="time-left"
+          data-testid="time-left"
+          className="text-4xl font-bold text-slate-900"
+        >
+          {toTimeString(timeLeft)}
+        </p>
+      </div>
+      <div className="mb-4 flex justify-between gap-4 border-b  border-b-slate-400 pb-4">
+        <Button
+          id="start_stop"
+          data-testid="play-pause"
+          onClick={() => setWhen((currentState) => !currentState)}
+          variant="primary"
+        >
+          Play/Pause
+        </Button>
 
-      <Button id="reset" onClick={reset}>
-        Reset
-      </Button>
+        <Button id="reset" onClick={reset} variant="secondary">
+          Reset
+        </Button>
+      </div>
 
       <TimerLengthControl
         length={breakTime}
@@ -127,11 +142,6 @@ export const TwentyFivePlusFiveClock: React.FC = () => {
         onDecreaseClick={decrease(setSessionTime, 'Session')}
         onIncreaseClick={increase(setSessionTime, 'Session')}
       />
-
-      <p id="timer-label">{state}</p>
-      <p id="time-left" data-testid="time-left">
-        {toTimeString(timeLeft)}
-      </p>
 
       {/* eslint-disable-next-line jsx-a11y/media-has-caption */}
       <audio
@@ -159,24 +169,37 @@ const TimerLengthControl: React.FC<TimerLengthControlProps> = ({
   onDecreaseClick,
   onIncreaseClick,
 }) => (
-  <>
-    <h2 id={`${id}-label`}>{title}</h2>
-    <p id={`${id}-length`} data-testid={`${id}-length`}>
-      {length}
-    </p>
-    <Button
-      id={`${id}-decrement`}
-      data-testid={`${id}-decrement`}
-      onClick={onDecreaseClick}
-    >
-      Decrease
-    </Button>
-    <Button
-      id={`${id}-increment`}
-      data-testid={`${id}-increment`}
-      onClick={onIncreaseClick}
-    >
-      Increase
-    </Button>
-  </>
+  <div className="mb-4 flex items-center justify-between gap-4 border-b border-b-slate-400 pb-4">
+    <div>
+      <h2 id={`${id}-label`} className="text-sm text-slate-600">
+        {title}
+      </h2>
+      <p id={`${id}-length`} data-testid={`${id}-length`} className="font-bold">
+        {length}{' '}
+        <span className="text-sm font-normal text-slate-600">minutes</span>
+      </p>
+    </div>
+    <div className="flex justify-between gap-4">
+      <div>
+        <Button
+          id={`${id}-decrement`}
+          data-testid={`${id}-decrement`}
+          onClick={onDecreaseClick}
+          variant="secondary"
+        >
+          Decrease
+        </Button>
+      </div>
+      <div>
+        <Button
+          id={`${id}-increment`}
+          data-testid={`${id}-increment`}
+          onClick={onIncreaseClick}
+          variant="secondary"
+        >
+          Increase
+        </Button>
+      </div>
+    </div>
+  </div>
 )
