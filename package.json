@@ -20,6 +20,7 @@
   },
   "dependencies": {
     "@radix-ui/react-slot": "^1.0.0",
+    "@react-types/shared": "^3.18.1",
     "@tanstack/react-query": "^4.2.3",
     "@vitejs/plugin-react": "^2.1.0",
     "accurate-interval": "^1.0.9",
