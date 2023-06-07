@@ -174,8 +174,14 @@ const TimerLengthControl: React.FC<TimerLengthControlProps> = ({
       <h2 id={`${id}-label`} className="text-sm text-slate-600">
         {title}
       </h2>
-      <p id={`${id}-length`} data-testid={`${id}-length`} className="font-bold">
-        {length}{' '}
+      <p>
+        <span
+          id={`${id}-length`}
+          data-testid={`${id}-length`}
+          className="font-bold"
+        >
+          {length}
+        </span>
         <span className="text-sm font-normal text-slate-600">minutes</span>
       </p>
     </div>
