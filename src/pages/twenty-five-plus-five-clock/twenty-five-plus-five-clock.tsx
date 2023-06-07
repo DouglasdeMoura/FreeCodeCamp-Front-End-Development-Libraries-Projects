@@ -58,34 +58,30 @@ export const TwentyFivePlusFiveClock: React.FC = () => {
   )
 
   const increase =
-    (
-      setState: React.Dispatch<React.SetStateAction<number>>,
-      n: number,
-      type: State,
-    ) =>
+    (setState: React.Dispatch<React.SetStateAction<number>>, type: State) =>
     () => {
-      if (n < TOP_LIMIT) {
-        setState((currentState) => currentState + 1)
+      setState((currentState) =>
+        currentState < TOP_LIMIT ? currentState + 1 : TOP_LIMIT,
+      )
 
-        if (type === state) {
-          setTimeLeft((currentState) => currentState + toSeconds(1))
-        }
+      if (type === state) {
+        setTimeLeft((currentState) => currentState + toSeconds(1))
       }
     }
 
   const decrease =
-    (
-      setState: React.Dispatch<React.SetStateAction<number>>,
-      n: number,
-      type: State,
-    ) =>
+    (setState: React.Dispatch<React.SetStateAction<number>>, type: State) =>
     () => {
-      if (n > BOTTOM_LIMIT) {
-        setState((currentState) => currentState - 1)
+      setState((currentState) =>
+        currentState > BOTTOM_LIMIT ? currentState - 1 : BOTTOM_LIMIT,
+      )
 
-        if (type === state) {
-          setTimeLeft((currentState) => currentState - toSeconds(1))
-        }
+      if (type === state) {
+        setTimeLeft((currentState) =>
+          Math.floor(currentState / 60) > 1
+            ? currentState - toSeconds(1)
+            : currentState,
+        )
       }
     }
 
@@ -120,16 +116,16 @@ export const TwentyFivePlusFiveClock: React.FC = () => {
         length={breakTime}
         title="Break Length"
         id="break"
-        onDecreaseClick={decrease(setBreakTime, breakTime, 'Break')}
-        onIncreaseClick={increase(setBreakTime, breakTime, 'Break')}
+        onDecreaseClick={decrease(setBreakTime, 'Break')}
+        onIncreaseClick={increase(setBreakTime, 'Break')}
       />
 
       <TimerLengthControl
         length={sessionTime}
         title="Session Length"
         id="session"
-        onDecreaseClick={decrease(setSessionTime, sessionTime, 'Session')}
-        onIncreaseClick={increase(setSessionTime, sessionTime, 'Session')}
+        onDecreaseClick={decrease(setSessionTime, 'Session')}
+        onIncreaseClick={increase(setSessionTime, 'Session')}
       />
 
       <p id="timer-label">{state}</p>
