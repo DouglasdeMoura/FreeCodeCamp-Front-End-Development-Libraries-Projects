@@ -1,73 +1,104 @@
 import { useRef, useState } from 'react'
 
 import { Button } from '../../components/button'
-import {
-  useBoolean,
-  useInterval,
-  useTimeLeft,
-  useTimersLength,
-} from './twenty-five-plus-five-clock.hooks'
 
-import { addSeconds } from 'date-fns'
+import { useIntervalWhen } from 'rooks'
 
 const BREAK_LENGTH = 5 // minutes
 const SESSION_LENGTH = 25 // minutes
-const TOP_LIMIT = 60
-const BOTTOM_LIMIT = 1
+const TOP_LIMIT = 60 // minutes
+const BOTTOM_LIMIT = 1 // minute
+
+const toSeconds = (minutes: number) => minutes * 60
+
+const toTimeString = (seconds: number) => {
+  const minutes = Math.floor(seconds / 60)
+  const remainingSeconds = seconds % 60
+  return `${minutes.toString().padStart(2, '0')}:${remainingSeconds
+    .toString()
+    .padStart(2, '0')}`
+}
+
+type State = 'Session' | 'Break'
 
 export const TwentyFivePlusFiveClock: React.FC = () => {
   const audioRef = useRef<HTMLAudioElement>(null)
 
-  const { breakLength, sessionLength } = useTimersLength(
-    BREAK_LENGTH,
-    SESSION_LENGTH,
-    TOP_LIMIT,
-    BOTTOM_LIMIT,
-  )
-  const { value: isRunning, toggle: toggleRunning } = useBoolean()
+  const [timeLeft, setTimeLeft] = useState(toSeconds(SESSION_LENGTH))
+  const [sessionTime, setSessionTime] = useState(SESSION_LENGTH)
+  const [breakTime, setBreakTime] = useState(BREAK_LENGTH)
+  const [state, setState] = useState<State>('Session')
+  const [when, setWhen] = useState(false)
 
-  const [state, setState] = useState<'Session' | 'Break'>('Session')
-  const [time, setTime] = useState<Date>()
-  const [start, setStart] = useState<Date>()
-
-  const timeLeft = useTimeLeft({
-    breakLength: breakLength.counter,
-    sessionLength: sessionLength.counter,
-    start,
-    state,
-    time,
-    onZero: () => {
-      const now = new Date()
-      audioRef?.current?.play()
-      setState(state === 'Break' ? 'Session' : 'Break')
-      setStart(now)
-      setTime(now)
-    },
-  })
-
-  useInterval(
+  useIntervalWhen(
     () => {
-      setTime((time) => {
-        const newTime = time ? addSeconds(time, 1) : addSeconds(start!, 1)
+      setTimeLeft((currentTimeLeft) => {
+        if (currentTimeLeft === 0) {
+          if (audioRef.current) {
+            audioRef.current.currentTime = 0
+            audioRef.current.play()
+          }
 
-        return newTime
+          return state === 'Session'
+            ? toSeconds(breakTime)
+            : toSeconds(sessionTime)
+        }
+
+        return currentTimeLeft - 1
       })
+
+      if (timeLeft === 0) {
+        setState((currentState) =>
+          currentState === 'Session' ? 'Break' : 'Session',
+        )
+      }
     },
-    isRunning ? 1000 : null,
+    1000,
+    when,
   )
 
-  const resetTime = () => {
-    const now = new Date()
-    setStart(now)
-    setTime(now)
+  const increase =
+    (
+      setState: React.Dispatch<React.SetStateAction<number>>,
+      n: number,
+      type: State,
+    ) =>
+    () => {
+      if (n < TOP_LIMIT) {
+        setState((currentState) => currentState + 1)
+
+        if (type === state) {
+          setTimeLeft((currentState) => currentState + toSeconds(1))
+        }
+      }
+    }
+
+  const decrease =
+    (
+      setState: React.Dispatch<React.SetStateAction<number>>,
+      n: number,
+      type: State,
+    ) =>
+    () => {
+      if (n > BOTTOM_LIMIT) {
+        setState((currentState) => currentState - 1)
+
+        if (type === state) {
+          setTimeLeft((currentState) => currentState - toSeconds(1))
+        }
+      }
+    }
+
+  const reset = () => {
+    setTimeLeft(toSeconds(SESSION_LENGTH))
+    setSessionTime(SESSION_LENGTH)
+    setBreakTime(BREAK_LENGTH)
     setState('Session')
-  }
+    setWhen(false)
 
-  const handleStartStop = () => {
-    toggleRunning()
-
-    if (!start) {
-      resetTime()
+    if (audioRef.current) {
+      audioRef.current.pause()
+      audioRef.current.currentTime = 0
     }
   }
 
@@ -76,46 +107,34 @@ export const TwentyFivePlusFiveClock: React.FC = () => {
       <Button
         id="start_stop"
         data-testid="play-pause"
-        onClick={handleStartStop}
+        onClick={() => setWhen((currentState) => !currentState)}
       >
         Play/Pause
       </Button>
 
-      <Button
-        id="reset"
-        onClick={() => {
-          breakLength.reset()
-          sessionLength.reset()
-          toggleRunning()
-          resetTime()
-          if (audioRef.current) {
-            audioRef.current.pause()
-            audioRef.current.currentTime = 0
-          }
-        }}
-      >
+      <Button id="reset" onClick={reset}>
         Reset
       </Button>
 
       <TimerLengthControl
-        length={breakLength.counter}
+        length={breakTime}
         title="Break Length"
         id="break"
-        onDecreaseClick={breakLength.decrease}
-        onIncreaseClick={breakLength.increase}
+        onDecreaseClick={decrease(setBreakTime, breakTime, 'Break')}
+        onIncreaseClick={increase(setBreakTime, breakTime, 'Break')}
       />
 
       <TimerLengthControl
-        length={sessionLength.counter}
+        length={sessionTime}
         title="Session Length"
         id="session"
-        onDecreaseClick={sessionLength.decrease}
-        onIncreaseClick={sessionLength.increase}
+        onDecreaseClick={decrease(setSessionTime, sessionTime, 'Session')}
+        onIncreaseClick={increase(setSessionTime, sessionTime, 'Session')}
       />
 
       <p id="timer-label">{state}</p>
       <p id="time-left" data-testid="time-left">
-        {timeLeft}
+        {toTimeString(timeLeft)}
       </p>
 
       {/* eslint-disable-next-line jsx-a11y/media-has-caption */}
