@@ -1,16 +1,16 @@
-name: FreeCodeCamp's Front End Development Libraries Projects
+name: Deploy to gh-pages
 on: [push]
 
 jobs:
   deploy:
-    runs-on: ubuntu-20.04
+    runs-on: ubuntu-latest
     env:
       API_BASE_URL: ${{ secrets.API_BASE_URL }}
     steps:
-      - uses: actions/checkout@v2
-      - uses: actions/setup-node@v1
+      - uses: actions/checkout@v3
+      - uses: actions/setup-node@v3
         with:
-          node-version: '16.x'
+          node-version: '18.x'
       - name: Build web-app
         run: |
           yarn install --frozen-lockfile
